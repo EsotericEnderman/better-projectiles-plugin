@@ -76,8 +76,6 @@ public class NuclearGhastDeathListener implements Listener {
                                 true
                         )
                 );
-
-                potion.splash();
             }
         }
     }
