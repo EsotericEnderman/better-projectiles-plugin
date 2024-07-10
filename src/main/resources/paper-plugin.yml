@@ -1,0 +1,7 @@
+name: BetterProjectiles
+version: '${version}'
+main: net.slqmy.better_projectiles.BetterProjectilesPlugin
+api-version: '1.20'
+prefix: BetterProjectiles
+authors: [Slqmy]
+description: A plugin that improves Minecraft's projectiles.

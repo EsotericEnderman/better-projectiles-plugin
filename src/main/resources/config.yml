@@ -1,0 +1,36 @@
+snow-golems:
+  health: 8.0
+
+nuclear-ghasts:
+  enabled: true
+  spawn-chance: 0.01
+  death:
+    explosion:
+      enabled: true
+      power: 3.0
+      set-fire: true
+      break-blocks: true
+    poison:
+      enabled: true
+      potency: 2
+      duration-seconds: 10
+      lingering: true
+
+projectiles:
+  snowball:
+    damage: 1.0
+    knockback: 1.0
+  egg:
+    damage: 1.0
+    knockback: 1.0
+  fire-charge:
+    throwing:
+      enabled: true
+      hunger-consumption: 1
+    speed: 2.0
+  ghast-fireball:
+    craftable: true
+    throwing:
+      enabled: true
+      hunger-consumption: 2
+    speed: 3.0
