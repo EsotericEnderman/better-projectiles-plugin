@@ -8,6 +8,13 @@
 # IntelliJ
 out/
 
+# Eclipse
+.classpath
+.project
+.settings/
+plugin/bin/
+api/bin/
+
 # Compiled class file
 *.class
 
@@ -18,7 +25,6 @@ out/
 *.ctxt
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
@@ -111,3 +117,9 @@ buildNumber.properties
 
 # Common working directory
 run/
+build
+.gradle
+/*.jar
+
+# .class files
+bin
