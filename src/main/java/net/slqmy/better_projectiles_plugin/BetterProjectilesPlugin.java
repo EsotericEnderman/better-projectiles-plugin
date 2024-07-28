@@ -20,6 +20,8 @@ public final class BetterProjectilesPlugin extends JavaPlugin {
 
     private final NamespacedKey snowGolemSnowballKey = new NamespacedKey(this, "snow_golem_snowball");
 
+    private final NamespacedKey snowGolemHealthIncreaseAttributeModifierKey = new NamespacedKey(this, "snow_golem_health_increase_attribute_modifier");
+
     private final NamespacedKey ghastFireballRecipeKey = new NamespacedKey(this, "ghast_fireball_recipe");
 
     private final NamespacedKey ghastFireballItemKey = new NamespacedKey(this, "ghast_fireball_item");
@@ -28,6 +30,10 @@ public final class BetterProjectilesPlugin extends JavaPlugin {
 
     public NamespacedKey getSnowGolemSnowballKey() {
         return snowGolemSnowballKey;
+    }
+
+    public NamespacedKey getSnowGolemHealthIncreaseAttributeModifierKey() {
+      return snowGolemHealthIncreaseAttributeModifierKey;
     }
 
     public NamespacedKey getGhastFireballRecipeKey() {

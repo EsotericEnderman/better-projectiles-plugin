@@ -3,6 +3,7 @@ package net.slqmy.better_projectiles_plugin.listener;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.attribute.AttributeModifier.Operation;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Snowman;
 import org.bukkit.event.EventHandler;
@@ -11,8 +12,6 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.jetbrains.annotations.NotNull;
 
 import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
-
-import java.util.UUID;
 
 public class SnowGolemSpawnListener implements Listener {
 
@@ -31,7 +30,7 @@ public class SnowGolemSpawnListener implements Listener {
             YamlConfiguration configuration = (YamlConfiguration) plugin.getConfig();
             double snowGolemHealth = configuration.getDouble("snow-golems.health");
 
-            maxHealthAttribute.addModifier(new AttributeModifier(UUID.randomUUID(), "snow_golem_health_increase", snowGolemHealth - snowGolem.getHealth(), AttributeModifier.Operation.ADD_NUMBER));
+            maxHealthAttribute.addModifier(new AttributeModifier(plugin.getSnowGolemHealthIncreaseAttributeModifierKey(), snowGolemHealth - snowGolem.getHealth(), Operation.ADD_NUMBER));
 
             snowGolem.setHealth(snowGolemHealth);
         }
