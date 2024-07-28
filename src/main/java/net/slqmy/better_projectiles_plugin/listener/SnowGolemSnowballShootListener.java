@@ -1,6 +1,5 @@
-package net.slqmy.better_projectiles.listener;
+package net.slqmy.better_projectiles_plugin.listener;
 
-import net.slqmy.better_projectiles.BetterProjectilesPlugin;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Snowman;
 import org.bukkit.event.EventHandler;
@@ -9,6 +8,8 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+
+import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
 
 public class SnowGolemSnowballShootListener implements Listener {
 

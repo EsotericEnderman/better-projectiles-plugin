@@ -1,6 +1,5 @@
-package net.slqmy.better_projectiles.listener;
+package net.slqmy.better_projectiles_plugin.listener;
 
-import net.slqmy.better_projectiles.BetterProjectilesPlugin;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -16,6 +15,8 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
+
+import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
 
 public class NuclearGhastDeathListener implements Listener {
 

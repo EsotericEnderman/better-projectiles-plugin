@@ -1,8 +1,9 @@
-package net.slqmy.better_projectiles;
+package net.slqmy.better_projectiles_plugin;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.slqmy.better_projectiles.listener.*;
+import net.slqmy.better_projectiles_plugin.listener.*;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

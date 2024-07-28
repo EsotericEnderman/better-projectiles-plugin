@@ -1,6 +1,5 @@
-package net.slqmy.better_projectiles.listener;
+package net.slqmy.better_projectiles_plugin.listener;
 
-import net.slqmy.better_projectiles.BetterProjectilesPlugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Ghast;
@@ -10,6 +9,8 @@ import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+
+import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
 
 import java.util.Random;
 

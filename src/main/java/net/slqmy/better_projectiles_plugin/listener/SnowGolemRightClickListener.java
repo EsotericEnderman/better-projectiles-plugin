@@ -1,4 +1,4 @@
-package net.slqmy.better_projectiles.listener;
+package net.slqmy.better_projectiles_plugin.listener;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;

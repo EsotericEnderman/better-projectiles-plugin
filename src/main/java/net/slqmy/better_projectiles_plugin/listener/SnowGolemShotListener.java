@@ -1,4 +1,4 @@
-package net.slqmy.better_projectiles.listener;
+package net.slqmy.better_projectiles_plugin.listener;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Snowman;
