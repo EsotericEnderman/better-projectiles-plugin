@@ -64,7 +64,7 @@ public class NuclearGhastDeathListener implements Listener {
             boolean poisonEnabled = poisonSettings.getBoolean("enabled");
 
             if (poisonEnabled) {
-                ThrownPotion potion = (ThrownPotion) world.spawnEntity(location, EntityType.SPLASH_POTION);
+                ThrownPotion potion = (ThrownPotion) world.spawnEntity(location, EntityType.POTION);
 
                 potion.getEffects().add( // error
                         new PotionEffect(
