@@ -1,7 +1,6 @@
 package net.slqmy.better_projectiles;
 
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.Style;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.slqmy.better_projectiles.listener.*;
 import org.bukkit.Bukkit;
