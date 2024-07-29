@@ -29,7 +29,7 @@ fun pascalcase(kebabCaseString: String): String {
 
 val projectAuthor = "Slqmy"
 
-group = "net." + projectAuthor + "." + snakecase(rootProject.name)
+group = "net." + projectAuthor.lowercase() + "." + snakecase(rootProject.name)
 version = "1.0.0-SNAPSHOT"
 description = "Test plugin for paperweight-userdev"
 
