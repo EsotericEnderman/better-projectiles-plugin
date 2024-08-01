@@ -31,7 +31,7 @@ val projectAuthor = "Slqmy"
 
 group = "net." + projectAuthor.lowercase() + "." + snakecase(rootProject.name)
 version = "1.0.0-SNAPSHOT"
-description = "Test plugin for paperweight-userdev"
+description = "A plugin that improves Minecraft's projectiles."
 
 val javaVersion = 21
 val paperApiVersion = "1.21"
