@@ -27,6 +27,10 @@ public class SnowGolemRightClickListener implements Listener {
 
         double maxHealth = maxHealthAttributeInstance.getValue();
 
+        if (health == maxHealth) {
+          return;
+        }
+
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
 
