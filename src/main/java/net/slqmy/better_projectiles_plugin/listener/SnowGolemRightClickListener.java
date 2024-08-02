@@ -1,5 +1,6 @@
 package net.slqmy.better_projectiles_plugin.listener;
 
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -57,6 +58,8 @@ public class SnowGolemRightClickListener implements Listener {
         }
 
         snowGolem.setHealth(Math.min(health + healthIncrease, maxHealth));
-        heldItem.setAmount(heldItem.getAmount() - 1);
+        if (player.getGameMode() != GameMode.CREATIVE) {
+          heldItem.setAmount(heldItem.getAmount() - 1);
+        }
     }
 }
