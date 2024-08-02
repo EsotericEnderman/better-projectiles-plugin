@@ -9,6 +9,7 @@ import org.bukkit.entity.Snowman;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.jetbrains.annotations.NotNull;
@@ -18,6 +19,10 @@ public class SnowGolemRightClickListener implements Listener {
     @EventHandler
     public void onSnowGolemRightClick(@NotNull PlayerInteractAtEntityEvent event) {
         if (!(event.getRightClicked() instanceof Snowman snowGolem)) {
+          return;
+        }
+
+        if (event.getHand() != EquipmentSlot.HAND) {
           return;
         }
 
