@@ -53,5 +53,6 @@ public class SnowGolemRightClickListener implements Listener {
         }
 
         snowGolem.setHealth(Math.min(health + healthIncrease, maxHealth));
+        heldItem.setAmount(heldItem.getAmount() - 1);
     }
 }
