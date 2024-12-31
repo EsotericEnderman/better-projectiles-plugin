@@ -8,8 +8,8 @@ A plugin that improves Minecraft's projectiles.
 
 - Increased snow golem health. (configurable)
 - Snow golems can now be healed by right-clicking them with snowballs or snow blocks.
-- Snow golems can be hurt by taking snowballs or snow blocks from them by right-clicking or shift-right-clicking them while not holding snow blocks or snowballs.
 - Snow golems can now be healed by throwing snowballs at them.
+- Snow golems can be hurt by taking snowballs or snow blocks from them by right-clicking or shift-right-clicking them while not holding snow blocks or snowballs.
 
 ### Fire Charges
 
