@@ -171,7 +171,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
       val snowballsToDrop = lostSnowballCount % 4
       val snowBlocksToDrop = (lostSnowballCount - snowballsToDrop) / 4
 
-      plugin.logger.info("Dropping $snowBlocksToDrop snow blocks and $snowballsToDrop snowballs")
+      plugin.logger.info("Dropping $snowBlocksToDrop snow block(s) and $snowballsToDrop snowball(s)")
 
       val world = entity.world
 
