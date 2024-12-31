@@ -154,11 +154,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     plugin.logger.info("Current Snowballs: $currentSnowballs")
     plugin.logger.info("Previous Snowballs: $previousSnowballs")
 
-    val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
-    val maxHealth = maxHealthAttribute.value
-
     if (currentSnowballs != previousSnowballs) {
-      val lostSnowballCount = min((previousSnowballs - currentSnowballs).toDouble(), maxHealth).toInt()
+      val lostSnowballCount = min((previousSnowballs - currentSnowballs).toDouble(), previousHealth).toInt()
 
       val snowballsToDrop = lostSnowballCount % 4
       val snowBlocksToDrop = (lostSnowballCount - snowballsToDrop) / 4
