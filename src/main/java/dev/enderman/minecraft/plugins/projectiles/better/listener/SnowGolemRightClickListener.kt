@@ -2,7 +2,10 @@ package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.Particle
 import org.bukkit.attribute.Attribute
+import org.bukkit.damage.DamageSource
+import org.bukkit.damage.DamageType
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
@@ -58,6 +61,7 @@ class SnowGolemRightClickListener : Listener {
     }
 
     entity.health = min(health + healthIncrease, maxHealth)
+    entity.world.spawnParticle(Particle.HEART, entity.location, 5, 0.5, 0.25, 0.5)
     if (player.gameMode != GameMode.CREATIVE) heldItem.amount -= 1
   }
 
