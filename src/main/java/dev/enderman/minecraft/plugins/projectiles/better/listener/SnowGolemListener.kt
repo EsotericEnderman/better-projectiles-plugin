@@ -194,7 +194,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
         val maxHealthAttribute = hitEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
         val maxHealth = maxHealthAttribute.value
 
-        hitEntity.health = min(health + maxHealth / 16.0, maxHealth)
+        hitEntity.health = min(health + maxHealth / 8.0, maxHealth)
       }
     }
   }
