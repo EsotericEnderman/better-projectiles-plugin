@@ -116,6 +116,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
   private fun onSnowGolemSnowTake(player: Player, golem: Snowman) {
     if (golem.noDamageTicks > 10) return
+    if (player.inventory.itemInMainHand.type != Material.AIR || player.inventory.itemInOffHand.type != Material.AIR) return
 
     val health = golem.health
 
