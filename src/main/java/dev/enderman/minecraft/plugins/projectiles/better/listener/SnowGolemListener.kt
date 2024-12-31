@@ -145,8 +145,11 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
 
-    val health = max(entity.health - event.finalDamage, 0.0)
-    val previousHealth = snowGolemHealthMap[entity.uniqueId] ?: entity.health
+    val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+    val maxHealth = maxHealthAttribute.value
+
+    val previousHealth = snowGolemHealthMap[entity.uniqueId] ?: maxHealth
+    val health = max(previousHealth - event.finalDamage, 0.0)
 
     if (health == 0.0) snowGolemHealthMap.remove(entity.uniqueId) else snowGolemHealthMap[entity.uniqueId] = health
 
