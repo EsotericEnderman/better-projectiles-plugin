@@ -1,7 +1,6 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
-import org.bukkit.Bukkit
 import org.bukkit.attribute.Attribute
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Snowball
@@ -21,7 +20,7 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
 
     val projectileType = projectile.type.toString().lowercase(Locale.getDefault())
 
-    Bukkit.getLogger().info("projectileType = $projectileType")
+    plugin.logger.info("projectileType = $projectileType")
 
     if (hitEntity == null) return
 
@@ -37,7 +36,7 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
       }
     }
 
-    Bukkit.getLogger().info("hitEntity.type = " + hitEntity.type)
+    plugin.logger.info("hitEntity.type = " + hitEntity.type)
 
     val configuration = plugin.config as YamlConfiguration
     val configurationSection = configuration.getConfigurationSection(
