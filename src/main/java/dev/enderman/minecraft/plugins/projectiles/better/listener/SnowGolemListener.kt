@@ -1,22 +1,53 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
+import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.Particle
 import org.bukkit.attribute.Attribute
-import org.bukkit.damage.DamageSource
-import org.bukkit.damage.DamageType
+import org.bukkit.attribute.AttributeModifier
+import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntitySpawnEvent
+import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
-import kotlin.math.max
+import org.bukkit.persistence.PersistentDataType
 import kotlin.math.min
 
-class SnowGolemRightClickListener : Listener {
+class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener {
+
+  @EventHandler
+  fun onSnowGolemSpawn(event: EntitySpawnEvent) {
+    val entity = event.entity
+
+    if (entity is Snowman) {
+      val maxHealthAttribute = checkNotNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
+      val configuration = plugin.config as YamlConfiguration
+      val snowGolemHealth = configuration.getDouble("snow-golems.health")
+
+      maxHealthAttribute.addModifier(
+        AttributeModifier(plugin.snowGolemHealthIncreaseAttributeModifierKey, snowGolemHealth - entity.health, AttributeModifier.Operation.ADD_NUMBER)
+      )
+
+      entity.health = snowGolemHealth
+    }
+  }
+
+  @EventHandler
+  fun onSnowGolemSnowballShoot(event: ProjectileLaunchEvent) {
+    val projectile = event.entity
+
+    if (projectile.shooter is Snowman) {
+      val dataContainer = projectile.persistentDataContainer
+
+      dataContainer.set(plugin.snowGolemSnowballKey, PersistentDataType.BOOLEAN, true)
+    }
+  }
 
   @EventHandler
   fun onSnowGolemRightClick(event: PlayerInteractAtEntityEvent) {

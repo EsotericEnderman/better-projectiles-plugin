@@ -28,12 +28,9 @@ class BetterProjectilesPlugin : JavaPlugin() {
 
     val pluginManager = Bukkit.getPluginManager()
 
-    pluginManager.registerEvents(SnowGolemRightClickListener(), this)
-
     pluginManager.registerEvents(FireballThrowListener(this), this)
-    pluginManager.registerEvents(SnowGolemSpawnListener(this), this)
+    pluginManager.registerEvents(SnowGolemListener(this), this)
     pluginManager.registerEvents(ProjectileHitListener(this), this)
-    pluginManager.registerEvents(SnowGolemSnowballShootListener(this), this)
     pluginManager.registerEvents(GhastSpawnListener(this), this)
     pluginManager.registerEvents(NuclearGhastDeathListener(this), this)
 
