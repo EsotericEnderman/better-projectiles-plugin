@@ -81,6 +81,8 @@ class SnowGolemRightClickListener : Listener {
   }
 
   private fun onSnowGolemSnowTake(player: Player, golem: Snowman) {
+    if (golem.noDamageTicks > 10) return
+
     val health = golem.health
 
     val maxHealthAttributeInstance = golem.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
