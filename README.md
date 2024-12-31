@@ -33,3 +33,7 @@ A plugin that improves Minecraft's projectiles.
 
 - Nuclear ghasts explode on death.
 - Nuclear ghasts spawn a cloud of poison on death.
+
+## Topics
+
+plugin minecraft paper plugins mc paper-plugin projectile projectiles papermc papermc-plugin papermc-plugins paper-plugins
