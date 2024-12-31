@@ -62,10 +62,12 @@ class SnowGolemRightClickListener : Listener {
   }
 
   private fun onSnowGolemSnowTake(player: Player, golem: Snowman) {
+    val health = golem.health
+
     val maxHealthAttributeInstance = golem.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
     val maxHealth = maxHealthAttributeInstance.value
 
-    val isLargeHealthDecrease = player.isSneaking
+    val isLargeHealthDecrease = player.isSneaking && health >= maxHealth / 2.0
 
     val healthDecrease = if (isLargeHealthDecrease) maxHealth / 2.0 else maxHealth / 8.0
 
