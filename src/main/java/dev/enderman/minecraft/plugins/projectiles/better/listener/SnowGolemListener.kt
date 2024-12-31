@@ -141,7 +141,10 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
 
+    plugin.logger.info("")
+
     plugin.logger.info("Snow golem took damage")
+    plugin.logger.info("Amount of damage according to the event: ${event.finalDamage}")
 
     val health = max(entity.health - event.finalDamage, 0.0)
     val previousHealth = entity.health
