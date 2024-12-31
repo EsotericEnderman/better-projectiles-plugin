@@ -27,10 +27,10 @@ fun pascalcase(kebabCaseString: String): String {
   return pascalCaseString
 }
 
-val projectAuthor = "Slqmy"
+val projectAuthor = "Esoteric Enderman"
 
-group = "net." + projectAuthor.lowercase() + "." + snakecase(rootProject.name)
-version = "1.0.0-SNAPSHOT"
+group = "dev.enderman"
+version = "0.1.0"
 description = "A plugin that improves Minecraft's projectiles."
 
 val javaVersion = 21
@@ -83,7 +83,8 @@ tasks {
 // Configure plugin.yml generation
 // - name, version, and description are inherited from the Gradle project.
 bukkitPluginYaml {
-  main = project.group.toString() + "." + pascalcase(rootProject.name)
+  main = project.group.toString() + ".minecraft.plugins.projectiles.better." + pascalcase(rootProject.name)
+  name = "BetterProjectiles"
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add(projectAuthor)
   apiVersion = paperApiVersion

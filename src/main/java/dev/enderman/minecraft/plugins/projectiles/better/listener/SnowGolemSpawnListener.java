@@ -1,4 +1,4 @@
-package net.slqmy.better_projectiles_plugin.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener;
 
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -11,7 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.jetbrains.annotations.NotNull;
 
-import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
+import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin;
 
 public class SnowGolemSpawnListener implements Listener {
 

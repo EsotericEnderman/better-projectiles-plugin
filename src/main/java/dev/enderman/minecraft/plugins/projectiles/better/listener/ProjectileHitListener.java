@@ -1,4 +1,4 @@
-package net.slqmy.better_projectiles_plugin.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener;
 
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
@@ -15,7 +15,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.projectiles.ProjectileSource;
 import org.jetbrains.annotations.NotNull;
 
-import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
+import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin;
 
 public class ProjectileHitListener implements Listener {
 

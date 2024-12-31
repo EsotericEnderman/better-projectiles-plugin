@@ -1,4 +1,4 @@
-package net.slqmy.better_projectiles_plugin.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,7 +17,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-import net.slqmy.better_projectiles_plugin.BetterProjectilesPlugin;
+import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin;
 
 public class FireballThrowListener implements Listener {
 

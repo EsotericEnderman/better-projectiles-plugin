@@ -1,4 +1,4 @@
-package net.slqmy.better_projectiles_plugin.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
