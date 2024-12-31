@@ -5,6 +5,7 @@ plugins {
   id("io.papermc.paperweight.userdev") version "1.7.1"
   id("xyz.jpenilla.run-paper") version "2.3.0" // Adds runServer and runMojangMappedServer tasks for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
+  id("com.github.johnrengelman.shadow") version "8.1.1"
   kotlin("jvm")
 }
 
@@ -71,7 +72,13 @@ tasks {
   javadoc {
     options.encoding = Charsets.UTF_8.name() // We want UTF-8 for everything
   }
-
+  shadowJar {
+    archiveClassifier.set("")
+    configurations = listOf(project.configurations.runtimeClasspath.get())
+  }
+  build {
+    dependsOn(shadowJar)
+  }
   // Only relevant when going with option 2 above
   /*
   reobfJar {
