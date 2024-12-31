@@ -154,12 +154,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val previousHealth = snowGolemHealthMap[entity.uniqueId] ?: maxHealth
     val health = max(previousHealth - event.finalDamage, 0.0)
 
-    if (health == 0.0) {
-      snowGolemHealthMap.remove(entity.uniqueId)
-      return
-    } else {
-      snowGolemHealthMap[entity.uniqueId] = health
-    }
+    if (health == 0.0) snowGolemHealthMap.remove(entity.uniqueId) else snowGolemHealthMap[entity.uniqueId] = health
 
     val currentSnowballs = health.toInt()
     val previousSnowballs = previousHealth.toInt()
