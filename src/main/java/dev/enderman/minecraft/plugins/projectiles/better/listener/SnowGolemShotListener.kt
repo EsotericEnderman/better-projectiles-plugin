@@ -1,23 +1,23 @@
-package dev.enderman.minecraft.plugins.projectiles.better.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener
 
-import org.bukkit.Location;
-import org.bukkit.entity.Snowman;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.jetbrains.annotations.NotNull;
+import org.bukkit.Location
+import org.bukkit.entity.Snowman
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.entity.ProjectileHitEvent
+import kotlin.math.abs
 
-public class SnowGolemShotListener implements Listener {
+class SnowGolemShotListener : Listener {
 
-    @EventHandler
-    public void onSnowGolemShot(@NotNull ProjectileHitEvent event) {
-        if (event.getHitEntity() instanceof Snowman snowGolem) {
-            Location eyeLocation = snowGolem.getEyeLocation();
-            Location hitLocation = event.getEntity().getLocation();
+  @EventHandler
+  fun onSnowGolemShot(event: ProjectileHitEvent) {
+    val entity = event.hitEntity
 
-            if (Math.abs(eyeLocation.getY() - hitLocation.getY()) > 0.3D) {
-                event.setCancelled(true);
-            }
-        }
+    if (entity is Snowman) {
+      val eyeLocation = entity.eyeLocation
+      val hitLocation = event.entity.location
+
+      if (abs(eyeLocation.y - hitLocation.y) > 0.3) event.isCancelled = true
     }
+  }
 }

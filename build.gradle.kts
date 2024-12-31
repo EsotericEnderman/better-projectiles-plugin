@@ -5,6 +5,7 @@ plugins {
   id("io.papermc.paperweight.userdev") version "1.7.1"
   id("xyz.jpenilla.run-paper") version "2.3.0" // Adds runServer and runMojangMappedServer tasks for testing
   id("xyz.jpenilla.resource-factory-bukkit-convention") version "1.1.1" // Generates plugin.yml based on the Gradle config
+  kotlin("jvm")
 }
 
 fun capitaliseFirstLetter(string: String): String {
@@ -58,6 +59,7 @@ dependencies {
   paperweight.paperDevBundle(paperApiVersion + "-R0.1-SNAPSHOT")
   // paperweight.foliaDevBundle("1.21-R0.1-SNAPSHOT")
   // paperweight.devBundle("com.example.paperfork", "1.21-R0.1-SNAPSHOT")
+  implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks {
@@ -88,4 +90,10 @@ bukkitPluginYaml {
   load = BukkitPluginYaml.PluginLoadOrder.STARTUP
   authors.add(projectAuthor)
   apiVersion = paperApiVersion
+}
+repositories {
+  mavenCentral()
+}
+kotlin {
+  jvmToolchain(21)
 }

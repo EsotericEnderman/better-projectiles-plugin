@@ -1,101 +1,66 @@
-package dev.enderman.minecraft.plugins.projectiles.better;
+package dev.enderman.minecraft.plugins.projectiles.better
 
-import dev.enderman.minecraft.plugins.projectiles.better.listener.*;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.TextDecoration;
+import dev.enderman.minecraft.plugins.projectiles.better.listener.*
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.Bukkit
+import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.ShapedRecipe
+import org.bukkit.persistence.PersistentDataType
+import org.bukkit.plugin.java.JavaPlugin
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
+class BetterProjectilesPlugin : JavaPlugin() {
 
-public final class BetterProjectilesPlugin extends JavaPlugin {
+  private val ghastFireballRecipeKey = NamespacedKey(this, "ghast_fireball_recipe")
+  val snowGolemSnowballKey = NamespacedKey(this, "snow_golem_snowball")
+  val snowGolemHealthIncreaseAttributeModifierKey = NamespacedKey(this, "snow_golem_health_increase_attribute_modifier")
+  val ghastFireballItemKey = NamespacedKey(this, "ghast_fireball_item")
+  val nuclearGhastMobKey = NamespacedKey(this, "nuclear_ghast")
 
-    private final NamespacedKey snowGolemSnowballKey = new NamespacedKey(this, "snow_golem_snowball");
+  override fun onEnable() {
+    val configuration = config as YamlConfiguration
 
-    private final NamespacedKey snowGolemHealthIncreaseAttributeModifierKey = new NamespacedKey(this, "snow_golem_health_increase_attribute_modifier");
+    configuration.options().copyDefaults()
+    saveDefaultConfig()
 
-    private final NamespacedKey ghastFireballRecipeKey = new NamespacedKey(this, "ghast_fireball_recipe");
+    val pluginManager = Bukkit.getPluginManager()
 
-    private final NamespacedKey ghastFireballItemKey = new NamespacedKey(this, "ghast_fireball_item");
+    pluginManager.registerEvents(SnowGolemRightClickListener(), this)
+    pluginManager.registerEvents(SnowGolemShotListener(), this)
 
-    private final NamespacedKey nuclearGhastMobKey = new NamespacedKey(this, "nuclear_ghast");
+    pluginManager.registerEvents(FireballThrowListener(this), this)
+    pluginManager.registerEvents(SnowGolemSpawnListener(this), this)
+    pluginManager.registerEvents(ProjectileHitListener(this), this)
+    pluginManager.registerEvents(SnowGolemSnowballShootListener(this), this)
+    pluginManager.registerEvents(GhastSpawnListener(this), this)
+    pluginManager.registerEvents(NuclearGhastDeathListener(this), this)
 
-    public NamespacedKey getSnowGolemSnowballKey() {
-        return snowGolemSnowballKey;
-    }
+    val ghastFireballsCraftable = configuration.getBoolean("projectiles.ghast-fireballs.craftable")
 
-    public NamespacedKey getSnowGolemHealthIncreaseAttributeModifierKey() {
-      return snowGolemHealthIncreaseAttributeModifierKey;
-    }
+    if (!ghastFireballsCraftable) return
 
-    public NamespacedKey getGhastFireballRecipeKey() {
-        return ghastFireballRecipeKey;
-    }
+    val ghastFireball = ItemStack(Material.FIRE_CHARGE)
 
-    public NamespacedKey getGhastFireballItemKey() {
-        return ghastFireballItemKey;
-    }
+    val fireballMeta = ghastFireball.itemMeta
 
-    public NamespacedKey getNuclearGhastMobKey() {
-        return nuclearGhastMobKey;
-    }
+    fireballMeta.displayName(Component.translatable("entity.minecraft.fireball").decoration(TextDecoration.ITALIC, false))
 
-    @Override
-    public void onEnable() {
-        YamlConfiguration configuration = (YamlConfiguration) getConfig();
+    val dataContainer = fireballMeta.persistentDataContainer
 
-        configuration.options().copyDefaults();
-        saveDefaultConfig();
+    dataContainer.set(ghastFireballItemKey, PersistentDataType.BOOLEAN, true)
 
-        PluginManager pluginManager = Bukkit.getPluginManager();
+    ghastFireball.setItemMeta(fireballMeta)
 
-        pluginManager.registerEvents(new SnowGolemRightClickListener(), this);
-        pluginManager.registerEvents(new SnowGolemShotListener(), this);
+    val ghastFireballRecipe = ShapedRecipe(ghastFireballRecipeKey, ghastFireball)
 
-        pluginManager.registerEvents(new FireballThrowListener(this), this);
-        pluginManager.registerEvents(new SnowGolemSpawnListener(this), this);
-        pluginManager.registerEvents(new ProjectileHitListener(this), this);
-        pluginManager.registerEvents(new SnowGolemSnowballShootListener(this), this);
-        pluginManager.registerEvents(new GhastSpawnListener(this), this);
-        pluginManager.registerEvents(new NuclearGhastDeathListener(this), this);
+    ghastFireballRecipe.shape("GGG", "GFG", "GGG")
 
-        boolean ghastFireballsCraftable = configuration.getBoolean("projectiles.ghast-fireballs.craftable");
+    ghastFireballRecipe.setIngredient('G', Material.GUNPOWDER)
+    ghastFireballRecipe.setIngredient('F', Material.FIRE_CHARGE)
 
-        if (!ghastFireballsCraftable) {
-            return;
-        }
-
-        ItemStack ghastFireball = new ItemStack(Material.FIRE_CHARGE);
-
-        ItemMeta fireballMeta = ghastFireball.getItemMeta();
-
-        fireballMeta.displayName(Component.translatable("entity.minecraft.fireball").decoration(TextDecoration.ITALIC, false));
-
-        PersistentDataContainer dataContainer = fireballMeta.getPersistentDataContainer();
-
-        dataContainer.set(ghastFireballItemKey, PersistentDataType.BOOLEAN, true);
-
-        ghastFireball.setItemMeta(fireballMeta);
-
-        ShapedRecipe ghastFireballRecipe = new ShapedRecipe(ghastFireballRecipeKey, ghastFireball);
-
-        ghastFireballRecipe.shape(
-                "GGG",
-                "GFG",
-                "GGG"
-        );
-
-        ghastFireballRecipe.setIngredient('G', Material.GUNPOWDER);
-        ghastFireballRecipe.setIngredient('F', Material.FIRE_CHARGE);
-
-        Bukkit.addRecipe(ghastFireballRecipe);
-    }
+    Bukkit.addRecipe(ghastFireballRecipe)
+  }
 }

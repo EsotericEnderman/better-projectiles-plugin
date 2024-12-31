@@ -1,69 +1,79 @@
-package dev.enderman.minecraft.plugins.projectiles.better.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener
 
-import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Projectile;
-import org.bukkit.entity.Snowball;
-import org.bukkit.entity.Snowman;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.projectiles.ProjectileSource;
-import org.jetbrains.annotations.NotNull;
+import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import org.bukkit.Bukkit
+import org.bukkit.attribute.Attribute
+import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Snowball
+import org.bukkit.entity.Snowman
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.entity.ProjectileHitEvent
+import java.util.*
+import kotlin.math.min
 
-import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin;
+class ProjectileHitListener(
+  private val plugin: BetterProjectilesPlugin
+) : Listener {
+  @EventHandler
+  fun onProjectileHit(
+    event: ProjectileHitEvent
+  ) {
+    val projectile = event.entity
+    val hitEntity = event.hitEntity
 
-public class ProjectileHitListener implements Listener {
+    val projectileType = projectile.type.toString().lowercase(
+        Locale.getDefault()
+      )
 
-    private final BetterProjectilesPlugin plugin;
+    Bukkit.getLogger().info(
+        "projectileType = $projectileType"
+      )
 
-    public ProjectileHitListener(BetterProjectilesPlugin plugin) {
-        this.plugin = plugin;
+    if (hitEntity == null) {
+      return
+    } else if (hitEntity is Snowman) {
+      if (projectile is Snowball) {
+        event.isCancelled = true
+
+        val health = hitEntity.health
+        val maxHealthAttribute = checkNotNull(
+          hitEntity.getAttribute(
+            Attribute.GENERIC_MAX_HEALTH
+          )
+        )
+        val maxHealth = maxHealthAttribute.value
+
+        hitEntity.health = min(
+          health + maxHealth / 16.0, maxHealth
+        )
+      }
     }
 
-    @EventHandler
-    public void onProjectileHit(@NotNull ProjectileHitEvent event) {
-        Projectile projectile = event.getEntity();
-        Entity hitEntity = event.getHitEntity();
+    Bukkit.getLogger().info(
+        "hitEntity.type = " + hitEntity.type
+      )
 
-        String projectileType = projectile.getType().toString().toLowerCase();
+    val configuration = plugin.config as YamlConfiguration
+    val configurationSection = configuration.getConfigurationSection(
+      "projectiles.$projectileType"
+    )
 
-        Bukkit.getLogger().info("projectileType = " + projectileType);
-
-        if (hitEntity == null) {
-            return;
-        } else if (hitEntity instanceof Snowman snowGolem) {
-            if (projectile instanceof Snowball) {
-                event.setCancelled(true);
-
-                double health = snowGolem.getHealth();
-                AttributeInstance maxHealthAttribute = snowGolem.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                assert maxHealthAttribute != null;
-
-                double maxHealth = maxHealthAttribute.getValue();
-
-                snowGolem.setHealth(Math.min(health + maxHealth / 16.0D, maxHealth));
-            }
-        }
-
-        Bukkit.getLogger().info("hitEntity.type = " + hitEntity.getType());
-
-        YamlConfiguration configuration = (YamlConfiguration) plugin.getConfig();
-        ConfigurationSection configurationSection = configuration.getConfigurationSection("projectiles." + projectileType);
-
-        if (configurationSection == null) {
-            return;
-        }
-
-        double damage = configurationSection.getDouble("damage");
-        double knockback = configurationSection.getDouble("knockback");
-
-        ProjectileSource source = projectile.getShooter();
-
-        hitEntity.setVelocity(projectile.getVelocity().normalize().multiply(knockback/20.0D));
+    if (configurationSection == null) {
+      return
     }
+
+    val damage = configurationSection.getDouble(
+      "damage"
+    )
+    val knockback = configurationSection.getDouble(
+      "knockback"
+    )
+
+    val source = projectile.shooter
+
+    hitEntity.velocity = projectile.velocity.normalize().multiply(
+        knockback / 20.0
+      )
+  }
 }

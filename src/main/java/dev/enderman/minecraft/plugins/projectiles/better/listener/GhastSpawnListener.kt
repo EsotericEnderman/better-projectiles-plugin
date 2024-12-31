@@ -1,53 +1,43 @@
-package dev.enderman.minecraft.plugins.projectiles.better.listener;
+package dev.enderman.minecraft.plugins.projectiles.better.listener
 
-import org.bukkit.NamespacedKey;
-import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Ghast;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntitySpawnEvent;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-import org.jetbrains.annotations.NotNull;
+import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Ghast
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntitySpawnEvent
+import org.bukkit.persistence.PersistentDataContainer
+import org.bukkit.persistence.PersistentDataType
+import java.util.*
 
-import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin;
+class GhastSpawnListener(private val plugin: BetterProjectilesPlugin) : Listener {
 
-import java.util.Random;
+  @EventHandler
+  fun onGhastSpawn(event: EntitySpawnEvent) {
+    val entity = event.entity
 
-public class GhastSpawnListener implements Listener {
+    if (entity is Ghast) {
+      val configuration = plugin.config as YamlConfiguration
 
-    private final static Random random = new Random();
+      val nuclearGhastsEnabled = configuration.getBoolean("nuclear-ghasts.enabled")
 
-    private final BetterProjectilesPlugin plugin;
+      if (!nuclearGhastsEnabled) return
 
-    public GhastSpawnListener(BetterProjectilesPlugin plugin) {
-        this.plugin = plugin;
+      val nuclearGhastSpawnChance = configuration.getDouble("nuclear-ghasts.spawn-chance")
+
+      val randomNumber = random.nextDouble()
+
+      if (randomNumber > nuclearGhastSpawnChance) return
+
+      val dataContainer: PersistentDataContainer = entity.getPersistentDataContainer()
+
+      val nuclearGhastMobKey = plugin.nuclearGhastMobKey
+
+      dataContainer.set(nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
     }
+  }
 
-    @EventHandler
-    public void onGhastSpawn(@NotNull EntitySpawnEvent event) {
-        if (event.getEntity() instanceof Ghast ghast) {
-            YamlConfiguration configuration = (YamlConfiguration) plugin.getConfig();
-
-            boolean nuclearGhastsEnabled = configuration.getBoolean("nuclear-ghasts.enabled");
-
-            if (!nuclearGhastsEnabled) {
-                return;
-            }
-
-            double nuclearGhastSpawnChance = configuration.getDouble("nuclear-ghasts.spawn-chance");
-
-            double randomNumber = random.nextDouble();
-
-            if (randomNumber > nuclearGhastSpawnChance) {
-                return;
-            }
-
-            PersistentDataContainer dataContainer = ghast.getPersistentDataContainer();
-
-            NamespacedKey nuclearGhastMobKey = plugin.getNuclearGhastMobKey();
-
-            dataContainer.set(nuclearGhastMobKey, PersistentDataType.BOOLEAN, true);
-        }
-    }
+  companion object {
+    private val random = Random()
+  }
 }
