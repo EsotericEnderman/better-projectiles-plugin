@@ -32,8 +32,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
     pluginManager.registerEvents(FireballThrowListener(this), this)
     pluginManager.registerEvents(SnowGolemListener(this), this)
     pluginManager.registerEvents(ProjectileHitListener(this), this)
-    pluginManager.registerEvents(GhastSpawnListener(this), this)
-    pluginManager.registerEvents(NuclearGhastDeathListener(this), this)
+    pluginManager.registerEvents(NuclearGhastListener(this), this)
 
     val ghastFireballsCraftable = configuration.getBoolean("projectiles.ghast-fireball.craftable")
 
