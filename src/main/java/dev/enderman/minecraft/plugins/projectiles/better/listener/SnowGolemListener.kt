@@ -142,8 +142,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     plugin.logger.info("Snow golem took damage")
 
-    val health = entity.health
-    val previousHealth = health + event.finalDamage
+    val health = entity.health - event.finalDamage
+    val previousHealth = entity.health
 
     plugin.logger.info("Health: $health")
     plugin.logger.info("Previous health: $previousHealth")
