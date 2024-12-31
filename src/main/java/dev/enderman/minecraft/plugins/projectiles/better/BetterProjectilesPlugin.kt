@@ -19,6 +19,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
   val snowGolemHealthIncreaseAttributeModifierKey = NamespacedKey(this, "snow_golem_health_increase_attribute_modifier")
   val ghastFireballItemKey = NamespacedKey(this, "ghast_fireball_item")
   val nuclearGhastMobKey = NamespacedKey(this, "nuclear_ghast")
+  val nuclearFireballKey = NamespacedKey(this, "nuclear_fireball")
 
   override fun onEnable() {
     val configuration = config as YamlConfiguration
