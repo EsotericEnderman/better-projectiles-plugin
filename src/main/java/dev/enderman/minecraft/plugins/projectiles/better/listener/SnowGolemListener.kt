@@ -126,7 +126,6 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val healthDecrease = if (isLargeHealthDecrease) maxHealth / 2.0 else maxHealth / 8.0
 
     golem.damage(healthDecrease, player)
-    player.inventory.addItem(ItemStack(if (isLargeHealthDecrease) Material.SNOW_BLOCK else Material.SNOWBALL))
   }
 
   @EventHandler
