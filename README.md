@@ -4,9 +4,17 @@ A plugin that improves Minecraft's projectiles.
 
 ## Features
 
+### Snow Golems
+
 - Increased snow golem health. (configurable)
 - Snow golems can now be healed by right-clicking them with snowballs or snow blocks.
 - Snow golems can now be healed by throwing snowballs at them.
+
+### Fire Charges
+
 - Fire charges can now be thrown.
+
+### Ghasts
+
 - Ghast fireballs can be crafted.
 - Ghast fireballs can be thrown and have the same behaviour as those shot by ghasts.
