@@ -18,3 +18,9 @@ A plugin that improves Minecraft's projectiles.
 
 - Ghast fireballs can be crafted.
 - Ghast fireballs can be thrown and have the same behaviour as those shot by ghasts.
+
+#### Nuclear Ghasts
+
+- 1% (configurable) of ghasts will now be nuclear.
+- Nuclear ghasts explode on death.
+- Nuclear ghasts spawn a cloud of poison on death.
