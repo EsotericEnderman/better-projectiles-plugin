@@ -8,12 +8,14 @@ import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
+import org.bukkit.entity.Snowball
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
+import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.inventory.EquipmentSlot
@@ -176,6 +178,23 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
       if (snowballsToDrop != 0) {
         world.dropItemNaturally(entity.location, ItemStack(Material.SNOWBALL, snowballsToDrop))
+      }
+    }
+  }
+
+  private fun onSnowGolemSnowballHit(event: ProjectileHitEvent) {
+    val hitEntity = event.hitEntity
+    val projectile = event.entity
+
+    if (hitEntity is Snowman) {
+      if (projectile is Snowball) {
+        event.isCancelled = true
+
+        val health = hitEntity.health
+        val maxHealthAttribute = hitEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+        val maxHealth = maxHealthAttribute.value
+
+        hitEntity.health = min(health + maxHealth / 16.0, maxHealth)
       }
     }
   }
