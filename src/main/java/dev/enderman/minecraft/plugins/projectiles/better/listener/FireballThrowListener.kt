@@ -2,9 +2,7 @@ package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
 import org.bukkit.Material
-import org.bukkit.configuration.ConfigurationSection
 import org.bukkit.configuration.file.YamlConfiguration
-import org.bukkit.entity.Entity
 import org.bukkit.entity.Fireball
 import org.bukkit.entity.Projectile
 import org.bukkit.entity.SmallFireball

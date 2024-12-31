@@ -1,6 +1,5 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
-import org.bukkit.Location
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

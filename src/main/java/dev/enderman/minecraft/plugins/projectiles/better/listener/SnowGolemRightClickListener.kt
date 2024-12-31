@@ -3,13 +3,11 @@ package dev.enderman.minecraft.plugins.projectiles.better.listener
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.attribute.Attribute
-import org.bukkit.attribute.AttributeInstance
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.inventory.EquipmentSlot
-import org.spigotmc.SpigotConfig.maxHealth
 import kotlin.math.min
 
 class SnowGolemRightClickListener : Listener {
