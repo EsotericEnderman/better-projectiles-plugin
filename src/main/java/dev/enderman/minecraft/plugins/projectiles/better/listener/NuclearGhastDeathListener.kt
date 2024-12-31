@@ -72,6 +72,8 @@ class NuclearGhastDeathListener(private val plugin: BetterProjectilesPlugin) : L
 
         item.itemMeta = meta
         potion.item = item
+
+        potion.splash()
       }
     }
   }
