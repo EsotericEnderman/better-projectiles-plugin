@@ -39,11 +39,7 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
     plugin.logger.info("hitEntity.type = " + hitEntity.type)
 
     val configuration = plugin.config as YamlConfiguration
-    val configurationSection = configuration.getConfigurationSection(
-      "projectiles.$projectileType"
-    )
-
-    if (configurationSection == null) return
+    val configurationSection = configuration.getConfigurationSection("projectiles.$projectileType") ?: return
 
     val damage = configurationSection.getDouble("damage")
     val knockback = configurationSection.getDouble("knockback")
