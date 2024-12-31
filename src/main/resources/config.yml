@@ -7,13 +7,13 @@ nuclear-ghasts:
   death:
     explosion:
       enabled: true
-      power: 3.0
+      power: 5.5
       set-fire: true
       break-blocks: true
     poison:
       enabled: true
-      potency: 2
-      duration-seconds: 10
+      potency: 3
+      duration-seconds: 15
       lingering: true
 
 projectiles:
