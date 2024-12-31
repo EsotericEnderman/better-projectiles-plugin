@@ -11,6 +11,7 @@ import org.bukkit.entity.Player
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.event.player.PlayerInteractAtEntityEvent
@@ -125,5 +126,12 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     golem.damage(healthDecrease, player)
     player.inventory.addItem(ItemStack(if (isLargeHealthDecrease) Material.SNOW_BLOCK else Material.SNOWBALL))
+  }
+
+  @EventHandler
+  private fun onSnowGolemDeath(event: EntityDeathEvent) {
+    val entity = event.entity
+    if (entity !is Snowman) return
+    event.drops.clear()
   }
 }
