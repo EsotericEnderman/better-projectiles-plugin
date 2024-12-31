@@ -11,6 +11,7 @@ import org.bukkit.entity.Player
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
@@ -133,5 +134,37 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
     event.drops.clear()
+  }
+
+  @EventHandler
+  private fun onSnowGolemDamage(event: EntityDamageEvent) {
+    val entity = event.entity
+    if (entity !is Snowman) return
+
+    val health = entity.health
+    val previousHealth = health + event.finalDamage
+
+    val previousSnowballs = previousHealth.toInt()
+    val currentSnowballs = health.toInt()
+
+    val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+    val maxHealth = maxHealthAttribute.value
+
+    if (currentSnowballs != previousSnowballs) {
+      val lostSnowballCount = min((previousSnowballs - currentSnowballs).toDouble(), maxHealth).toInt()
+
+      val snowballsToDrop = lostSnowballCount % 4
+      val snowBlocksToDrop = (lostSnowballCount - snowballsToDrop) / 4
+
+      val world = entity.world
+
+      if (snowBlocksToDrop != 0) {
+        world.dropItemNaturally(entity.location, ItemStack(Material.SNOW_BLOCK, snowBlocksToDrop))
+      }
+
+      if (snowballsToDrop != 0) {
+        world.dropItemNaturally(entity.location, ItemStack(Material.SNOWBALL, snowballsToDrop))
+      }
+    }
   }
 }
