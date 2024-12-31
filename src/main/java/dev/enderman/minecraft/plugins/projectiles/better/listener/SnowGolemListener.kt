@@ -140,11 +140,19 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
 
+    plugin.logger.info("Snow golem took damage")
+
     val health = entity.health
     val previousHealth = health + event.finalDamage
 
-    val previousSnowballs = previousHealth.toInt()
+    plugin.logger.info("Health: $health")
+    plugin.logger.info("Previous health: $previousHealth")
+
     val currentSnowballs = health.toInt()
+    val previousSnowballs = previousHealth.toInt()
+
+    plugin.logger.info("Current Snowballs: $currentSnowballs")
+    plugin.logger.info("Previous Snowballs: $previousSnowballs")
 
     val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
     val maxHealth = maxHealthAttribute.value
