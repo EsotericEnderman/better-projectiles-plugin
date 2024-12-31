@@ -63,7 +63,7 @@ class SnowGolemRightClickListener : Listener {
     val finalHealth = min(health + healthIncrease, maxHealth)
     val actualAmountHealed = finalHealth - health
 
-    entity.health = actualAmountHealed
+    entity.health = finalHealth
     entity.world.spawnParticle(Particle.HEART, entity.location, actualAmountHealed.toInt(), 0.5, 0.25, 0.5)
     if (player.gameMode != GameMode.CREATIVE) heldItem.amount -= 1
   }
