@@ -146,20 +146,11 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     if (entity !is Snowman) return
     if (entity.noDamageTicks > 10) return
 
-    plugin.logger.info("")
-    plugin.logger.info("Entity ${entity.name} has been damaged")
-
     val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
     val maxHealth = maxHealthAttribute.value
 
-    plugin.logger.info("Max health: $maxHealth")
-    plugin.logger.info("Map value: ${snowGolemHealthMap[entity.uniqueId]}")
-
     val previousHealth = snowGolemHealthMap[entity.uniqueId] ?: maxHealth
     val health = max(previousHealth - event.finalDamage, 0.0)
-
-    plugin.logger.info("Health: $health")
-    plugin.logger.info("Previous health: $previousHealth")
 
     if (health == 0.0) {
       snowGolemHealthMap.remove(entity.uniqueId)
@@ -176,8 +167,6 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
       val snowballsToDrop = lostSnowballCount % 4
       val snowBlocksToDrop = (lostSnowballCount - snowballsToDrop) / 4
-
-      plugin.logger.info("Dropping $snowBlocksToDrop snow block(s) and $snowballsToDrop snowball(s)")
 
       val world = entity.world
 
