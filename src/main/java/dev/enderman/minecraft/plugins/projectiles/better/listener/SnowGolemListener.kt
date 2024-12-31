@@ -182,6 +182,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     }
   }
 
+  @EventHandler
   private fun onSnowGolemSnowballHit(event: ProjectileHitEvent) {
     val hitEntity = event.hitEntity
     val projectile = event.entity
