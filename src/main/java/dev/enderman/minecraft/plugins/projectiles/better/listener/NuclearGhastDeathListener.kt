@@ -8,6 +8,7 @@ import org.bukkit.entity.ThrownPotion
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
+import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -19,7 +20,7 @@ class NuclearGhastDeathListener(private val plugin: BetterProjectilesPlugin) : L
     val entity = event.entity
 
     if (entity is Ghast) {
-      val container = entity.getPersistentDataContainer()
+      val container = entity.persistentDataContainer
 
       val isNuclearGhast = true == container.get(plugin.nuclearGhastMobKey, PersistentDataType.BOOLEAN)
 
@@ -32,12 +33,14 @@ class NuclearGhastDeathListener(private val plugin: BetterProjectilesPlugin) : L
       val poisonSettings = nuclearGhastDeathSettings.getConfigurationSection("poison")!!
       val explosionSettings = nuclearGhastDeathSettings.getConfigurationSection("explosion")!!
 
-      val explosionEnabled = explosionSettings.getBoolean("explosion.enabled")
+      val explosionEnabled = explosionSettings.getBoolean("enabled")
 
-      val world = entity.getWorld()
-      val location = entity.getLocation()
+      val world = entity.world
+      val location = entity.location
 
       if (explosionEnabled) {
+        plugin.logger.info("NUCLEAR GHAST EXPLOSION IMMINENT!")
+
         world.createExplosion(
           location,
           explosionSettings.getDouble("power").toFloat(),
@@ -52,7 +55,10 @@ class NuclearGhastDeathListener(private val plugin: BetterProjectilesPlugin) : L
       if (poisonEnabled) {
         val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
 
-        potion.effects.add( // error
+        val item = potion.item
+        val meta = item.itemMeta as PotionMeta
+
+        meta.addCustomEffect(
           PotionEffect(
             PotionEffectType.POISON,
             poisonSettings.getInt("duration-seconds") * 20,
@@ -60,8 +66,12 @@ class NuclearGhastDeathListener(private val plugin: BetterProjectilesPlugin) : L
             true,
             true,
             true
-          )
+          ),
+          true
         )
+
+        item.itemMeta = meta
+        potion.item = item
       }
     }
   }
