@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import kotlin.math.max
 import kotlin.math.min
 
 class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener {
@@ -142,7 +143,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     plugin.logger.info("Snow golem took damage")
 
-    val health = entity.health - event.finalDamage
+    val health = max(entity.health - event.finalDamage, 0.0)
     val previousHealth = entity.health
 
     plugin.logger.info("Health: $health")
