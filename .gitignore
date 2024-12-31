@@ -58,7 +58,7 @@ hs_err_pid*
 Icon
 
 # Thumbnails
-._*
+._*esotericenderman/better-combat-plugin
 
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
@@ -116,10 +116,13 @@ buildNumber.properties
 .flattened-pom.xml
 
 # Common working directory
-run/
+run/*
 build
 .gradle
 /*.jar
+
+# EULA - should be agreed to
+!run/eula.txt
 
 # .class files
 bin
