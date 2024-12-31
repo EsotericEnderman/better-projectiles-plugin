@@ -65,15 +65,17 @@ class SnowGolemRightClickListener : Listener {
     val finalHealth = min(health + healthIncrease, maxHealth)
     val actualAmountHealed = finalHealth - health
 
-    entity.health = finalHealth
-    entity.world.spawnParticle(Particle.HEART, entity.location, actualAmountHealed.toInt(), 0.5, 0.25, 0.5)
+    if (actualAmountHealed != 0.0) {
+      entity.health = finalHealth
+      entity.world.spawnParticle(Particle.HEART, entity.location, actualAmountHealed.toInt(), 0.5, 0.25, 0.5)
 
-    if (player.gameMode != GameMode.CREATIVE && actualAmountHealed != 0.0) {
-      heldItem.amount -= 1
+      if (player.gameMode != GameMode.CREATIVE) {
+        heldItem.amount -= 1
 
-      if (isLargeHealthIncrease && actualAmountHealed != maxHealth / 2.0) {
-        val snowBallCompensation = (maxHealth / 2.0 - actualAmountHealed).toInt()
-        player.inventory.addItem(ItemStack(Material.SNOWBALL, snowBallCompensation))
+        if (isLargeHealthIncrease && actualAmountHealed != maxHealth / 2.0) {
+          val snowBallCompensation = (maxHealth / 2.0 - actualAmountHealed).toInt()
+          player.inventory.addItem(ItemStack(Material.SNOWBALL, snowBallCompensation))
+        }
       }
     }
   }
