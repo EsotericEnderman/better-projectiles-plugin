@@ -144,6 +144,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
   private fun onSnowGolemDamage(event: EntityDamageEvent) {
     val entity = event.entity
     if (entity !is Snowman) return
+    if (entity.noDamageTicks > 10) return
 
     plugin.logger.info("")
     plugin.logger.info("Entity ${entity.name} has been damaged")
