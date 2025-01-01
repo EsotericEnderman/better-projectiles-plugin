@@ -334,6 +334,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     event.isCancelled = true
     projectile.remove()
+    hitEntity.world.spawnParticle(Particle.SNOWFLAKE, projectile.location, 2, 0.1, 0.1, 0.1)
 
     val health = hitEntity.health
     val maxHealthAttribute = hitEntity.getAttribute(Attribute.MAX_HEALTH)!!
