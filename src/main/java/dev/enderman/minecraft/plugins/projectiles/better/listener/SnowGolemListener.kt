@@ -31,6 +31,7 @@ import org.bukkit.scheduler.BukkitTask
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.sqrt
 
 class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener {
 
@@ -333,8 +334,19 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     if (projectile !is Snowball) return
 
     event.isCancelled = true
+
+    val hitLocation = projectile.location
+
     projectile.remove()
-    hitEntity.world.spawnParticle(Particle.SNOWFLAKE, projectile.location, 2, 0.1, 0.1, 0.1)
+    hitEntity.world.spawnParticle(Particle.SNOWFLAKE, hitLocation, 2, 0.1, 0.1, 0.1)
+
+    val faceLocation = hitEntity.eyeLocation
+
+    val distanceSquared = hitLocation.distanceSquared(faceLocation)
+    if (distanceSquared <= 0.80) return
+
+    plugin.logger.info("Distance squared: $distanceSquared")
+    plugin.logger.info("Distance: ${sqrt(distanceSquared)}")
 
     val health = hitEntity.health
     val maxHealthAttribute = hitEntity.getAttribute(Attribute.MAX_HEALTH)!!
