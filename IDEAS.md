@@ -23,3 +23,7 @@ This file is used to track ideas for future development of this project.
 
 - [ ] Flabber about.
 - [ ] Zoom around when they get hit.
+
+### Ur-Ghast
+
+- Just a bigger variant of normal ghasts, that's it...
