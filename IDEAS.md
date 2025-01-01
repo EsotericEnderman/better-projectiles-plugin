@@ -17,7 +17,7 @@ This file is used to track ideas for future development of this project.
 
 - [X] Add more radiation effects (blindness).
 
-### Black Hole Ghast
+### Black Hole Ghasts
 
 - [ ] Have projectiles circle around black hole ghasts.
 - [ ] Have black hole ghasts be able to shoot their orbiting projectiles at the player.
