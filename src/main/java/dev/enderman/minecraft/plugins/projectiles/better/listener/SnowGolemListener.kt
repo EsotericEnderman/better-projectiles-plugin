@@ -169,6 +169,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val actualAmountHealed = finalHealth - health
 
     if (actualAmountHealed != 0.0) {
+      event.isCancelled = true
+
       entity.health = finalHealth
       entity.world.spawnParticle(Particle.HEART, entity.location, actualAmountHealed.toInt(), 0.5, 0.25, 0.5)
 
@@ -204,7 +206,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
     event.drops.clear()
-    if (!entity.isDerp) return
+    if (entity.isDerp) return
     event.drops.add(ItemStack(Material.PUMPKIN))
   }
 
