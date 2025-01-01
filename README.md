@@ -4,11 +4,15 @@ A plugin that improves Minecraft's projectiles.
 
 ## Features
 
+> [!TIP]
+> 
+> Most values are configurable! Check out [config.yml](./src/main/resources/config.yml)!
+
 ### Snow Golems
 
 #### Health
 
-- Increased snow golem health. (configurable)
+- Increased snow golem health.
 - Snow golems can now be healed by right-clicking them with snowballs or snow blocks.
 - Snow golems can now be healed by throwing snowballs at them.
 - Snow golems can be hurt by taking snowballs or snow blocks from them by right-clicking or shift-right-clicking them while not holding snow blocks or snowballs.
@@ -28,7 +32,7 @@ A plugin that improves Minecraft's projectiles.
 
 #### Nuclear Ghasts
 
-- 1% (configurable) of ghasts will now be nuclear.
+- 1% of ghasts will now be nuclear.
 
 ##### Nuclear Fireballs
 
