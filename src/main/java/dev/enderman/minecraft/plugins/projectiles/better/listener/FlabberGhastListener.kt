@@ -1,13 +1,18 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import net.minecraft.world.entity.MoverType
+import net.minecraft.world.phys.Vec3
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.craftbukkit.entity.CraftGhast
 import org.bukkit.entity.Ghast
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.entity.EntityTargetLivingEntityEvent
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.scheduler.BukkitTask
 import java.util.Random
 
 class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
@@ -47,6 +52,47 @@ class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Liste
     if (!isFlabberGhast) return
 
     event.isCancelled = true
+  }
+
+  @EventHandler
+  private fun onHurt(event: EntityDamageByEntityEvent) {
+    val entity = event.entity
+
+    if (entity !is Ghast) return
+
+    val dataContainer = entity.persistentDataContainer
+    val isFlabberGhasted = dataContainer.get(plugin.isFlabberGhastedKey, PersistentDataType.BOOLEAN) == true
+
+    if (isFlabberGhasted) return
+
+    dataContainer.set(plugin.isFlabberGhastedKey, PersistentDataType.BOOLEAN, true)
+
+    var iterations = 0
+
+    var task: BukkitTask? = null
+
+    val runnable = Runnable {
+      if (iterations == 25) {
+        task!!.cancel()
+
+        dataContainer.set(plugin.isFlabberGhastedKey, PersistentDataType.BOOLEAN, false)
+
+        return@Runnable
+      }
+
+      val location = entity.location
+      val lookingDirection = location.direction
+
+      val movement = lookingDirection.multiply(5.0)
+
+      plugin.logger.info("Updating flabberghast position!")
+
+      entity.teleport(location.add(movement))
+    }
+
+    plugin.logger.info("Starting new flabberghast task...")
+
+    task = plugin.server.scheduler.runTaskTimer(plugin, runnable, 2L, 2L)
   }
 
   companion object {

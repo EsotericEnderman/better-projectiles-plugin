@@ -63,6 +63,7 @@
 ### Flabberghasts
 
 - Flabber around (they are passive).
+- Zoom around when they get hit.
 
 ## Projectiles
 

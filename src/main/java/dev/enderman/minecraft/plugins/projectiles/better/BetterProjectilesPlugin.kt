@@ -31,6 +31,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
   val blackHoleGhastScaleKey = NamespacedKey(this, "black_hole_ghast_scale")
 
   val flabberGhastMobKey = NamespacedKey(this, "flabber_ghast")
+  val isFlabberGhastedKey = NamespacedKey(this, "is_flabberghasted")
 
   override fun onEnable() {
     val configuration = config as YamlConfiguration
