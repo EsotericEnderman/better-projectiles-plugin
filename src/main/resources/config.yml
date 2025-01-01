@@ -26,6 +26,7 @@ ur-ghasts:
   spawn-chance: 0.02
   extra-scale: 1.00
   extra-health: 70
+  extra-detection-range: 300
   fireballs:
     explosion:
       power: 4.0

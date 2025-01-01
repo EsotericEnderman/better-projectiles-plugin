@@ -47,6 +47,12 @@ class UrGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
       val maxHealthModifier = AttributeModifier(plugin.urGhastHealthKey, extraHealth, AttributeModifier.Operation.ADD_NUMBER)
       maxHealthAttribute.addModifier(maxHealthModifier)
 
+      val extraDetectionRange = configuration.getDouble("ur-ghasts.extra-detection-range")
+
+      val detectionRangeAttribute = entity.getAttribute(Attribute.FOLLOW_RANGE)!!
+      val detectionRangeModifier = AttributeModifier(plugin.urGhastDetectionRangeKey, extraDetectionRange, AttributeModifier.Operation.ADD_NUMBER)
+      detectionRangeAttribute.addModifier(detectionRangeModifier)
+
       val ghastNameComponent = Component.translatable("entity.minecraft.ghast")
       val urGhastNameComponent = Component.text("Ur-").append(ghastNameComponent)
 

@@ -48,6 +48,7 @@
 - 8x as big as a normal ghast.
 - 8x the health of a normal ghast.
 - More powerful fireballs.
+- 4x as high detection range.
 
 ## Projectiles
 
