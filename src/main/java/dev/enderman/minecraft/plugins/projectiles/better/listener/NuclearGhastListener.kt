@@ -163,6 +163,7 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
       val newCustomName = nuclear.append(customName)
 
       entity.customName(newCustomName)
+      entity.isCustomNameVisible = false
     }
   }
 
