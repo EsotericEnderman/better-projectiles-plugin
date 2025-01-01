@@ -20,6 +20,16 @@ projectiles:
   snowball:
     damage: 1.0
     knockback: 1.0
+    snowman-snowball:
+      damage: 1.0
+      slowness:
+        enabled: true
+        potency: 3
+        duration-seconds: 15
+      blindness:
+        enabled: true
+        potency: 3
+        duration-seconds: 15
   egg:
     damage: 1.0
     knockback: 1.0

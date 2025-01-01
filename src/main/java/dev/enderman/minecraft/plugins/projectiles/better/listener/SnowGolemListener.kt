@@ -7,6 +7,7 @@ import org.bukkit.Particle
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.damage.DamageSource
 import org.bukkit.damage.DamageType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
@@ -14,6 +15,7 @@ import org.bukkit.entity.Snowball
 import org.bukkit.entity.Snowman
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
@@ -66,7 +68,10 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val projectile = event.entity
 
     if (projectile !is Snowball) return
-    if (projectile.shooter !is Snowman) return
+
+    val shooter = projectile.shooter
+
+    if (shooter !is Snowman) return
 
     val dataContainer = projectile.persistentDataContainer
     val isSnowGolemProjectile = dataContainer.get(plugin.snowGolemSnowballKey, PersistentDataType.BOOLEAN) == true
@@ -77,13 +82,42 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     if (hitEntity !is LivingEntity) return
 
-    hitEntity.addPotionEffect(
-      PotionEffect(PotionEffectType.SLOWNESS, 5 * 20, 1, true, true, true)
-    )
+    val configurationSection = plugin.config.getConfigurationSection("projectiles.snowball.snowman-snowball")!!
 
-    hitEntity.addPotionEffect(
-      PotionEffect(PotionEffectType.BLINDNESS, 5 * 20, 1, true, true, true)
-    )
+    val damage = configurationSection.getDouble("damage")
+
+    val source = DamageSource
+      .builder(DamageType.ARROW)
+      .withDamageLocation(hitEntity.location)
+      .withDirectEntity(shooter)
+      .withCausingEntity(shooter)
+      .build()
+
+    hitEntity.damage(damage, source)
+
+    val slownessSettings = configurationSection.getConfigurationSection("slowness")!!
+    val blindnessSettings = configurationSection.getConfigurationSection("blindness")!!
+
+    val slownessEnabled = slownessSettings.getBoolean("enabled")
+    val blindnessEnabled = blindnessSettings.getBoolean("enabled")
+
+    if (slownessEnabled) {
+      val duration = blindnessSettings.getInt("duration-seconds")
+      val potency = blindnessSettings.getInt("potency")
+
+      hitEntity.addPotionEffect(
+        PotionEffect(PotionEffectType.SLOWNESS, duration * 20, potency - 1, true, true, true)
+      )
+    }
+
+    if (blindnessEnabled) {
+      val duration = blindnessSettings.getInt("duration-seconds")
+      val potency = blindnessSettings.getInt("potency")
+
+      hitEntity.addPotionEffect(
+        PotionEffect(PotionEffectType.BLINDNESS, duration * 20, potency - 1, true, true, true)
+      )
+    }
   }
 
   @EventHandler
