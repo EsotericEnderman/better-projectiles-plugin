@@ -40,7 +40,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
 
     if (entity is Snowman) {
-      val maxHealthAttribute = checkNotNull(entity.getAttribute(Attribute.MAX_HEALTH))
+      val maxHealthAttribute = entity.getAttribute(Attribute.MAX_HEALTH)!!
       val configuration = plugin.config as YamlConfiguration
       val snowGolemHealth = configuration.getDouble("snow-golems.health")
 
