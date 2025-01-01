@@ -21,3 +21,5 @@ Mark the checkbox as ticked (`[x]`) in order to mark an issue as fixed.
 - [X] The game thinks that all black hole ghasts are ur-ghasts because of how only the scale is checked.
 
 ## Won't Fix
+
+## Fixed
