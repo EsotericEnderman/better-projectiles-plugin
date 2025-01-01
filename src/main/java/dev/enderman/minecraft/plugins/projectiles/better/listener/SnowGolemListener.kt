@@ -284,6 +284,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     if (attacker is Snowman) return
     if (attacker !is LivingEntity) return
 
+    if (attacker is Player && attacker.gameMode == GameMode.CREATIVE) return
+
     entity.target = attacker
   }
 
