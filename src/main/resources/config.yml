@@ -25,6 +25,7 @@ ur-ghasts:
   enabled: true
   spawn-chance: 0.02
   extra-scale: 1.00
+  extra-health: 30
 
 projectiles:
   snowball:
