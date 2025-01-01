@@ -27,7 +27,8 @@ class BetterProjectilesPlugin : JavaPlugin() {
   val urGhastFireballKey = NamespacedKey(this, "ur_ghast_fireball")
   val urGhastDetectionRangeKey = NamespacedKey(this, "ur_ghast_detection_range")
 
-  val blackHoleGhastMobKey = NamespacedKey(this, "black_hole_ghast")
+  val blackHoleGhastHealthKey = NamespacedKey(this, "black_hole_ghast_health")
+  val blackHoleGhastScaleKey = NamespacedKey(this, "black_hole_ghast_scale")
 
   override fun onEnable() {
     val configuration = config as YamlConfiguration

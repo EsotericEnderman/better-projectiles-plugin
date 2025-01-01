@@ -54,6 +54,12 @@
 - More powerful fireballs.
 - 4x as high detection range.
 
+### Black Hole Ghasts
+
+- 0.5% of ghasts will now be black hole ghasts.
+- Smaller (as they are denser) than normal ghasts.
+- More health.
+
 ## Projectiles
 
 ### Snow Balls

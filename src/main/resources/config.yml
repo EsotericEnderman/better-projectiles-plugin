@@ -43,6 +43,7 @@ black-hole-ghasts:
   enabled: true
   spawn-chance: 0.005
   reduced-scale: 0.9
+  extra-health: 10
 
 projectiles:
   snowball:

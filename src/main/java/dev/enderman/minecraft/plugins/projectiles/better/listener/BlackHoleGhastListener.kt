@@ -1,13 +1,14 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import org.bukkit.attribute.Attribute
+import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Ghast
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
-import org.bukkit.persistence.PersistentDataType
 import java.util.Random
 
 class BlackHoleGhastListener(private val plugin: BetterProjectilesPlugin) : Listener {
@@ -30,9 +31,17 @@ class BlackHoleGhastListener(private val plugin: BetterProjectilesPlugin) : List
 
     if (randomNumber > blackHoleGhastSpawnChance) return
 
-    val dataContainer = entity.getPersistentDataContainer()
+    val reducedScale = -configuration.getDouble("black-hole-ghasts.reduced-scale")
 
-    dataContainer.set(plugin.blackHoleGhastMobKey, PersistentDataType.BOOLEAN, true)
+    val scaleAttribute = entity.getAttribute(Attribute.SCALE)!!
+    val scaleModifier = AttributeModifier(plugin.blackHoleGhastScaleKey, reducedScale, AttributeModifier.Operation.ADD_NUMBER)
+    scaleAttribute.addModifier(scaleModifier)
+
+    val extraHealth = configuration.getDouble("black-hole-ghasts.extra-health")
+
+    val maxHealthAttribute = entity.getAttribute(Attribute.MAX_HEALTH)!!
+    val maxHealthModifier = AttributeModifier(plugin.blackHoleGhastHealthKey, extraHealth, AttributeModifier.Operation.ADD_NUMBER)
+    maxHealthAttribute.addModifier(maxHealthModifier)
   }
 
   companion object {
