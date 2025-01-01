@@ -1,10 +1,10 @@
 # Issues
 
-## WIP
-
 This file is used to keep track of issues with the plugin.
 
 Mark the checkbox as ticked (`[x]`) in order to mark an issue as fixed.
+
+## WIP
 
 ### Snow Golems
 
