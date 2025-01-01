@@ -7,6 +7,7 @@ import org.bukkit.Particle
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.damage.DamageType
 import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowball
@@ -175,6 +176,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
     if (entity.noDamageTicks > 10) return
+
+    plugin.logger.info("Damage type: ${event.damageSource.damageType}")
 
     val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
     val maxHealth = maxHealthAttribute.value
