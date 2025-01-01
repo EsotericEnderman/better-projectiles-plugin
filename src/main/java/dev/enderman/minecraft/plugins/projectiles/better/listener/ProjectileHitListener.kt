@@ -5,6 +5,7 @@ import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.damage.DamageSource
 import org.bukkit.damage.DamageType
 import org.bukkit.entity.Entity
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,13 +17,11 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
   @EventHandler
   fun onProjectileHit(event: ProjectileHitEvent) {
     val projectile = event.entity
-    val hitEntity = event.hitEntity
+    val hitEntity = event.hitEntity ?: return
 
     val projectileType = projectile.type.toString().lowercase(Locale.getDefault())
 
     plugin.logger.info("projectileType = $projectileType")
-
-    if (hitEntity !is Player) return
 
     plugin.logger.info("hitEntity.type = " + hitEntity.type)
 
@@ -43,6 +42,8 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
     if (source is Entity) builder.withDirectEntity(source).withCausingEntity(source)
 
     val damageSource = builder.build()
+
+    if (hitEntity !is LivingEntity) return
 
     hitEntity.damage(damage, damageSource)
   }
