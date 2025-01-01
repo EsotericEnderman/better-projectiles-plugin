@@ -74,9 +74,9 @@ class UrGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
         val scaleAttribute = source.getAttribute(Attribute.SCALE)!!
         val value = scaleAttribute.value
 
-        val isNuclearGhast = value != 1.0
+        val isUrGhast = value != 1.0
 
-        if (isNuclearGhast) {
+        if (isUrGhast) {
           val projectileContainer = entity.persistentDataContainer
           projectileContainer.set(plugin.urGhastFireballKey, PersistentDataType.BOOLEAN, true)
 
