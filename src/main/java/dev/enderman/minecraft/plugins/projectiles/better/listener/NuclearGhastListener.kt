@@ -165,33 +165,33 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
   fun onGhastSpawn(event: EntitySpawnEvent) {
     val entity = event.entity
 
-    if (entity is Ghast) {
-      val configuration = plugin.config as YamlConfiguration
+    if (entity !is Ghast) return
 
-      val nuclearGhastsEnabled = configuration.getBoolean("nuclear-ghasts.enabled")
+    val configuration = plugin.config as YamlConfiguration
 
-      if (!nuclearGhastsEnabled) return
+    val nuclearGhastsEnabled = configuration.getBoolean("nuclear-ghasts.enabled")
 
-      val nuclearGhastSpawnChance = configuration.getDouble("nuclear-ghasts.spawn-chance")
+    if (!nuclearGhastsEnabled) return
 
-      val randomNumber = random.nextDouble()
+    val nuclearGhastSpawnChance = configuration.getDouble("nuclear-ghasts.spawn-chance")
 
-      if (randomNumber > nuclearGhastSpawnChance) return
+    val randomNumber = random.nextDouble()
 
-      val dataContainer = entity.getPersistentDataContainer()
+    if (randomNumber > nuclearGhastSpawnChance) return
 
-      val nuclearGhastMobKey = plugin.nuclearGhastMobKey
+    val dataContainer = entity.getPersistentDataContainer()
 
-      dataContainer.set(nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
+    val nuclearGhastMobKey = plugin.nuclearGhastMobKey
 
-      val customName = entity.customName() ?: Component.translatable("entity.minecraft.ghast")
+    dataContainer.set(nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
 
-      val nuclear = Component.text("☢ ")
-      val newCustomName = nuclear.append(customName)
+    val customName = entity.customName() ?: Component.translatable("entity.minecraft.ghast")
 
-      entity.customName(newCustomName)
-      entity.isCustomNameVisible = false
-    }
+    val nuclear = Component.text("☢ ")
+    val newCustomName = nuclear.append(customName)
+
+    entity.customName(newCustomName)
+    entity.isCustomNameVisible = false
   }
 
   companion object {
