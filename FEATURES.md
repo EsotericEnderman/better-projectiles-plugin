@@ -60,6 +60,10 @@
 - Smaller (as they are denser) than normal ghasts.
 - More health.
 
+### Flabberghasts
+
+- Flabber around (they are passive).
+
 ## Projectiles
 
 ### Snow Balls
