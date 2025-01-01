@@ -204,6 +204,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
     if (entity !is Snowman) return
     event.drops.clear()
+    if (!entity.isDerp) return
+    event.drops.add(ItemStack(Material.PUMPKIN))
   }
 
   @EventHandler
