@@ -124,7 +124,13 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
 
     if (!isNuclear) return
 
-    entity.world.createExplosion(entity.location, 4F, true, true, shooter)
+    val configuration = plugin.config.getConfigurationSection("nuclear-ghasts.fireballs.explosion")!!
+
+    val power = configuration.getDouble("power").toFloat()
+    val setFire = configuration.getBoolean("set-fire")
+    val breakBlocks = configuration.getBoolean("break-blocks")
+
+    entity.world.createExplosion(entity.location, power, setFire, breakBlocks, shooter)
   }
 
   @EventHandler

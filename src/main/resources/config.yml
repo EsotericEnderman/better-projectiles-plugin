@@ -4,6 +4,11 @@ snow-golems:
 nuclear-ghasts:
   enabled: true
   spawn-chance: 0.01
+  fireballs:
+    explosion:
+      power: 4.0
+      set-fire: true
+      break-blocks: true
   death:
     explosion:
       enabled: true
