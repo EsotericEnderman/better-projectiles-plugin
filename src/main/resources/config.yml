@@ -21,6 +21,11 @@ nuclear-ghasts:
       potency: 3
       duration-seconds: 15
       lingering: true
+    blindness:
+      enabled: true
+      potency: 3
+      duration-seconds: 15
+      lingering: true
 
 ur-ghasts:
   enabled: true

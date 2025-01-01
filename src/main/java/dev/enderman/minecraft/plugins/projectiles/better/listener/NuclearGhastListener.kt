@@ -40,6 +40,7 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
       val nuclearGhastDeathSettings = configuration.getConfigurationSection("nuclear-ghasts.death")!!
 
       val poisonSettings = nuclearGhastDeathSettings.getConfigurationSection("poison")!!
+      val blindnessSettings = nuclearGhastDeathSettings.getConfigurationSection("blindness")!!
       val explosionSettings = nuclearGhastDeathSettings.getConfigurationSection("explosion")!!
 
       val explosionEnabled = explosionSettings.getBoolean("enabled")
@@ -72,6 +73,32 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
             PotionEffectType.POISON,
             poisonSettings.getInt("duration-seconds") * 20,
             poisonSettings.getInt("potency") - 1,
+            true,
+            true,
+            true
+          ),
+          true
+        )
+
+        newItem.itemMeta = meta
+        potion.item = newItem
+
+        potion.splash()
+      }
+
+      val blindnessEnabled = blindnessSettings.getBoolean("enabled")
+
+      if (blindnessEnabled) {
+        val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
+
+        val newItem = ItemStack(if (blindnessSettings.getBoolean("lingering")) Material.LINGERING_POTION else Material.POTION)
+        val meta = newItem.itemMeta as PotionMeta
+
+        meta.addCustomEffect(
+          PotionEffect(
+            PotionEffectType.BLINDNESS,
+            blindnessSettings.getInt("duration-seconds") * 20,
+            blindnessSettings.getInt("potency") - 1,
             true,
             true,
             true

@@ -44,6 +44,7 @@
 
 - Nuclear ghasts explode on death.
 - Nuclear ghasts spawn a cloud of poison on death.
+- Nuclear ghasts spawn a cloud of blindness on death.
 
 ### Ur-Ghasts
 
