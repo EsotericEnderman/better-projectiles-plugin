@@ -30,9 +30,7 @@ class FireballThrowListener(private val plugin: BetterProjectilesPlugin) : Liste
 
       val dataContainer = heldItem.itemMeta.persistentDataContainer
 
-      val isGhastFireball = java.lang.Boolean.TRUE == dataContainer.get(
-        plugin.ghastFireballItemKey, PersistentDataType.BOOLEAN
-      )
+      val isGhastFireball = true == dataContainer.get(plugin.ghastFireballItemKey, PersistentDataType.BOOLEAN)
 
       if (isGhastFireball) {
         fireballClass = Fireball::class.java
