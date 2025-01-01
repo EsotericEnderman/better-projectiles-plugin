@@ -14,6 +14,7 @@ import org.bukkit.event.entity.EntityTargetLivingEntityEvent
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.scheduler.BukkitTask
 import java.util.Random
+import kotlin.math.min
 
 class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
 
@@ -87,7 +88,12 @@ class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Liste
 
       plugin.logger.info("Updating flabberghast position!")
 
-      entity.teleport(location.add(movement))
+      var newVelocity = entity.velocity.add(movement)
+      val magnitude = newVelocity.length()
+      val newMagnitude = min(magnitude, 1.25)
+      newVelocity = newVelocity.normalize().multiply(newMagnitude)
+
+      entity.velocity = newVelocity
     }
 
     plugin.logger.info("Starting new flabberghast task...")
