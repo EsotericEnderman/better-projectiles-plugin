@@ -19,9 +19,13 @@ A plugin that improves Minecraft's projectiles.
 - Snow golems will drop snowballs and/or snow blocks when damaged. The amount of items dropped will depend on the damage dealt. They will not drop anything if they dry up, are set on fire, or take damage from water.
 - Water particles will spawn when snowmen are drying up.
 
-### Fire Charges
+#### Aggro
 
-- Fire charges can now be thrown.
+- Snow golems will become aggressive towards any mob that attacks them, except for snow golems themselves.
+
+#### Death
+
+- Snow golems now drop their carved pumpkin on death (if they have it on), making them fully recyclable and able to be re-built!
 
 ### Ghasts
 
@@ -42,6 +46,21 @@ A plugin that improves Minecraft's projectiles.
 
 - Nuclear ghasts explode on death.
 - Nuclear ghasts spawn a cloud of poison on death.
+
+### Projectiles
+
+#### Snow Balls
+
+- Snow balls now deal damage.
+
+#### Eggs
+
+- Eggs now deal damage.
+
+#### Fire Charges
+
+- Fire charges can now be thrown.
+- Hunger will be consumed when they are thrown.
 
 ## Topics
 
