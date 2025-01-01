@@ -5,11 +5,15 @@ import net.kyori.adventure.text.Component
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.Fireball
 import org.bukkit.entity.Ghast
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
+import org.bukkit.event.entity.ProjectileHitEvent
+import org.bukkit.event.entity.ProjectileLaunchEvent
+import org.bukkit.persistence.PersistentDataType
 import java.util.*
 
 class UrGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
@@ -49,6 +53,54 @@ class UrGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
       entity.customName(urGhastNameComponent)
       entity.isCustomNameVisible = false
     }
+  }
+
+  @EventHandler
+  fun onFireBallSpawn(event: ProjectileLaunchEvent) {
+    val entity = event.entity
+
+    if (entity is Fireball) {
+      val source = entity.shooter
+
+      if (source is Ghast) {
+        val scaleAttribute = source.getAttribute(Attribute.SCALE)!!
+        val value = scaleAttribute.value
+
+        val isNuclearGhast = value != 1.0
+
+        if (isNuclearGhast) {
+          val projectileContainer = entity.persistentDataContainer
+          projectileContainer.set(plugin.urGhastFireballKey, PersistentDataType.BOOLEAN, true)
+
+          entity.yield = 0F
+        }
+      }
+    }
+  }
+
+  @EventHandler
+  private fun onUrFireballHit(event: ProjectileHitEvent) {
+    val entity = event.entity
+
+    if (entity !is Fireball) return
+
+    val shooter = entity.shooter
+    if (shooter !is Ghast) return
+
+    if (entity.yield != 0F) return
+
+    val container = entity.persistentDataContainer
+    val isUrFireball = container.get(plugin.urGhastFireballKey, PersistentDataType.BOOLEAN) == true
+
+    if (!isUrFireball) return
+
+    val configuration = plugin.config.getConfigurationSection("ur-ghasts.fireballs.explosion")!!
+
+    val power = configuration.getDouble("power").toFloat()
+    val setFire = configuration.getBoolean("set-fire")
+    val breakBlocks = configuration.getBoolean("break-blocks")
+
+    entity.world.createExplosion(entity.location, power, setFire, breakBlocks, shooter)
   }
 
   companion object {

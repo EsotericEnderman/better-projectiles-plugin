@@ -23,6 +23,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
 
   val urGhastScaleKey = NamespacedKey(this, "ur_ghast_scale")
   val urGhastHealthKey = NamespacedKey(this, "ur_ghast_health")
+  val urGhastFireballKey = NamespacedKey(this, "ur_ghast_fireball")
 
   override fun onEnable() {
     val configuration = config as YamlConfiguration

@@ -26,6 +26,11 @@ ur-ghasts:
   spawn-chance: 0.02
   extra-scale: 1.00
   extra-health: 30
+  fireballs:
+    explosion:
+      power: 4.0
+      set-fire: true
+      break-blocks: true
 
 projectiles:
   snowball:
