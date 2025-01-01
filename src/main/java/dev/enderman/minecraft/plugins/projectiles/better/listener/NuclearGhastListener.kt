@@ -15,7 +15,6 @@ import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
-import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
@@ -150,7 +149,7 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
 
       if (randomNumber > nuclearGhastSpawnChance) return
 
-      val dataContainer: PersistentDataContainer = entity.getPersistentDataContainer()
+      val dataContainer = entity.getPersistentDataContainer()
 
       val nuclearGhastMobKey = plugin.nuclearGhastMobKey
 
