@@ -181,9 +181,7 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
 
     val dataContainer = entity.getPersistentDataContainer()
 
-    val nuclearGhastMobKey = plugin.nuclearGhastMobKey
-
-    dataContainer.set(nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
+    dataContainer.set(plugin.nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
 
     val customName = entity.customName() ?: Component.translatable("entity.minecraft.ghast")
 
