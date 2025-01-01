@@ -4,7 +4,7 @@ A plugin that improves Minecraft's projectiles.
 
 ## Features
 
-See [FEATURE.md](./FEATURES.md) for the full list of features of this plugin!
+See [FEATURES.md](./FEATURES.md) for the full list of features of this plugin!
 
 ## Ideas
 
