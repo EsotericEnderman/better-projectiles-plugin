@@ -46,6 +46,7 @@ class UrGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
       val urGhastNameComponent = Component.text("Ur-").append(ghastNameComponent)
 
       entity.customName(urGhastNameComponent)
+      entity.isCustomNameVisible = false
     }
   }
 
