@@ -191,6 +191,8 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
       return
     }
 
+    if (damageType == DamageType.DROWN) return
+
     val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
     val maxHealth = maxHealthAttribute.value
 
