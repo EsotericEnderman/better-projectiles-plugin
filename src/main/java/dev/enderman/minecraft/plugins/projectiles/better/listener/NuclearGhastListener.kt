@@ -28,89 +28,89 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
   fun onNuclearGhastDeath(event: EntityDeathEvent) {
     val entity = event.entity
 
-    if (entity is Ghast) {
-      val container = entity.persistentDataContainer
+    if (entity !is Ghast) return
 
-      val isNuclearGhast = true == container.get(plugin.nuclearGhastMobKey, PersistentDataType.BOOLEAN)
+    val container = entity.persistentDataContainer
 
-      if (!isNuclearGhast) return
+    val isNuclearGhast = true == container.get(plugin.nuclearGhastMobKey, PersistentDataType.BOOLEAN)
 
-      val configuration = plugin.config as YamlConfiguration
+    if (!isNuclearGhast) return
 
-      val nuclearGhastDeathSettings = configuration.getConfigurationSection("nuclear-ghasts.death")!!
+    val configuration = plugin.config as YamlConfiguration
 
-      val poisonSettings = nuclearGhastDeathSettings.getConfigurationSection("poison")!!
-      val blindnessSettings = nuclearGhastDeathSettings.getConfigurationSection("blindness")!!
-      val explosionSettings = nuclearGhastDeathSettings.getConfigurationSection("explosion")!!
+    val nuclearGhastDeathSettings = configuration.getConfigurationSection("nuclear-ghasts.death")!!
 
-      val explosionEnabled = explosionSettings.getBoolean("enabled")
+    val poisonSettings = nuclearGhastDeathSettings.getConfigurationSection("poison")!!
+    val blindnessSettings = nuclearGhastDeathSettings.getConfigurationSection("blindness")!!
+    val explosionSettings = nuclearGhastDeathSettings.getConfigurationSection("explosion")!!
 
-      val world = entity.world
-      val location = entity.location
+    val explosionEnabled = explosionSettings.getBoolean("enabled")
 
-      if (explosionEnabled) {
-        plugin.logger.info("NUCLEAR GHAST EXPLOSION IMMINENT!")
+    val world = entity.world
+    val location = entity.location
 
-        world.createExplosion(
-          location,
-          explosionSettings.getDouble("power").toFloat(),
-          explosionSettings.getBoolean("set-fire"),
-          explosionSettings.getBoolean("break-blocks"),
-          entity
-        )
-      }
+    if (explosionEnabled) {
+      plugin.logger.info("NUCLEAR GHAST EXPLOSION IMMINENT!")
 
-      val poisonEnabled = poisonSettings.getBoolean("enabled")
+      world.createExplosion(
+        location,
+        explosionSettings.getDouble("power").toFloat(),
+        explosionSettings.getBoolean("set-fire"),
+        explosionSettings.getBoolean("break-blocks"),
+        entity
+      )
+    }
 
-      if (poisonEnabled) {
-        val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
+    val poisonEnabled = poisonSettings.getBoolean("enabled")
 
-        val newItem = ItemStack(if (poisonSettings.getBoolean("lingering")) Material.LINGERING_POTION else Material.POTION)
-        val meta = newItem.itemMeta as PotionMeta
+    if (poisonEnabled) {
+      val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
 
-        meta.addCustomEffect(
-          PotionEffect(
-            PotionEffectType.POISON,
-            poisonSettings.getInt("duration-seconds") * 20,
-            poisonSettings.getInt("potency") - 1,
-            true,
-            true,
-            true
-          ),
+      val newItem = ItemStack(if (poisonSettings.getBoolean("lingering")) Material.LINGERING_POTION else Material.POTION)
+      val meta = newItem.itemMeta as PotionMeta
+
+      meta.addCustomEffect(
+        PotionEffect(
+          PotionEffectType.POISON,
+          poisonSettings.getInt("duration-seconds") * 20,
+          poisonSettings.getInt("potency") - 1,
+          true,
+          true,
           true
-        )
+        ),
+        true
+      )
 
-        newItem.itemMeta = meta
-        potion.item = newItem
+      newItem.itemMeta = meta
+      potion.item = newItem
 
-        potion.splash()
-      }
+      potion.splash()
+    }
 
-      val blindnessEnabled = blindnessSettings.getBoolean("enabled")
+    val blindnessEnabled = blindnessSettings.getBoolean("enabled")
 
-      if (blindnessEnabled) {
-        val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
+    if (blindnessEnabled) {
+      val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
 
-        val newItem = ItemStack(if (blindnessSettings.getBoolean("lingering")) Material.LINGERING_POTION else Material.POTION)
-        val meta = newItem.itemMeta as PotionMeta
+      val newItem = ItemStack(if (blindnessSettings.getBoolean("lingering")) Material.LINGERING_POTION else Material.POTION)
+      val meta = newItem.itemMeta as PotionMeta
 
-        meta.addCustomEffect(
-          PotionEffect(
-            PotionEffectType.BLINDNESS,
-            blindnessSettings.getInt("duration-seconds") * 20,
-            blindnessSettings.getInt("potency") - 1,
-            true,
-            true,
-            true
-          ),
+      meta.addCustomEffect(
+        PotionEffect(
+          PotionEffectType.BLINDNESS,
+          blindnessSettings.getInt("duration-seconds") * 20,
+          blindnessSettings.getInt("potency") - 1,
+          true,
+          true,
           true
-        )
+        ),
+        true
+      )
 
-        newItem.itemMeta = meta
-        potion.item = newItem
+      newItem.itemMeta = meta
+      potion.item = newItem
 
-        potion.splash()
-      }
+      potion.splash()
     }
   }
 
