@@ -18,7 +18,7 @@ This file is used to track ideas for future development of this project.
 
 ### Flabberghasts
 
-![Flabberghasts](../assets/ideas/Flabberghasts.png)
+![Flabberghasts](assets/ideas/Flabberghasts.png)
 
 - [ ] Flabber about.
 - [ ] Zoom around when they get hit.
