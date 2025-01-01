@@ -36,7 +36,7 @@ version = "0.1.0"
 description = "A plugin that improves Minecraft's projectiles."
 
 val javaVersion = 21
-val paperApiVersion = "1.21"
+val paperApiVersion = "1.21.3"
 
 java {
   // Configure the java toolchain. This allows gradle to auto-provision JDK 21 on systems that only have JDK 11 installed for example.
