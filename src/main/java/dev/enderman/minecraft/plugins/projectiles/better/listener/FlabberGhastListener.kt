@@ -96,6 +96,8 @@ class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Liste
       newVelocity = newVelocity.normalize().multiply(newMagnitude)
 
       entity.velocity = newVelocity
+
+      iterations++
     }
 
     plugin.logger.info("Starting new flabberghast task...")
