@@ -30,6 +30,8 @@ class BetterProjectilesPlugin : JavaPlugin() {
   val blackHoleGhastHealthKey = NamespacedKey(this, "black_hole_ghast_health")
   val blackHoleGhastScaleKey = NamespacedKey(this, "black_hole_ghast_scale")
 
+  val flabberGhastMobKey = NamespacedKey(this, "flabber_ghast")
+
   override fun onEnable() {
     val configuration = config as YamlConfiguration
 
@@ -44,6 +46,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
     pluginManager.registerEvents(NuclearGhastListener(this), this)
     pluginManager.registerEvents(UrGhastListener(this), this)
     pluginManager.registerEvents(BlackHoleGhastListener(this), this)
+    pluginManager.registerEvents(FlabberGhastListener(this), this)
 
     val ghastFireballsCraftable = configuration.getBoolean("projectiles.ghast-fireball.craftable")
 

@@ -45,6 +45,10 @@ black-hole-ghasts:
   reduced-scale: 0.7
   extra-health: 10
 
+flabberghasts:
+  enabled: true
+  spawn-chance: 0.05
+
 projectiles:
   snowball:
     damage: 1.0
