@@ -10,6 +10,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
+import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.persistence.PersistentDataContainer
@@ -98,9 +99,30 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
         if (isNuclearGhast) {
           val projectileContainer = entity.persistentDataContainer
           projectileContainer.set(plugin.nuclearFireballKey, PersistentDataType.BOOLEAN, true)
+
+          entity.yield = 0F
         }
       }
     }
+  }
+
+  @EventHandler
+  private fun onNuclearFireballHit(event: ProjectileHitEvent) {
+    val entity = event.entity
+
+    if (entity !is Fireball) return
+
+    val shooter = entity.shooter
+    if (shooter !is Ghast) return
+
+    if (entity.yield != 0F) return
+
+    val container = entity.persistentDataContainer
+    val isNuclear = container.get(plugin.nuclearFireballKey, PersistentDataType.BOOLEAN) == true
+
+    if (!isNuclear) return
+
+    entity.world.createExplosion(entity.location, 4F, true, true, shooter)
   }
 
   @EventHandler
