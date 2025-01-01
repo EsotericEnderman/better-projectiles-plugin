@@ -329,21 +329,20 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val hitEntity = event.hitEntity
     val projectile = event.entity
 
-    if (hitEntity is Snowman) {
-      if (projectile is Snowball) {
-        event.isCancelled = true
+    if (hitEntity !is Snowman) return
+    if (projectile !is Snowball) return
 
-        val health = hitEntity.health
-        val maxHealthAttribute = hitEntity.getAttribute(Attribute.MAX_HEALTH)!!
-        val maxHealth = maxHealthAttribute.value
+    event.isCancelled = true
 
-        val finalHealth = min(health + maxHealth / 8.0, maxHealth)
+    val health = hitEntity.health
+    val maxHealthAttribute = hitEntity.getAttribute(Attribute.MAX_HEALTH)!!
+    val maxHealth = maxHealthAttribute.value
 
-        hitEntity.health = finalHealth
+    val finalHealth = min(health + maxHealth / 8.0, maxHealth)
 
-        val mapValue = snowGolemHealthMap[hitEntity.uniqueId]
-        if (mapValue != null) snowGolemHealthMap[hitEntity.uniqueId] = finalHealth
-      }
-    }
+    hitEntity.health = finalHealth
+
+    val mapValue = snowGolemHealthMap[hitEntity.uniqueId]
+    if (mapValue != null) snowGolemHealthMap[hitEntity.uniqueId] = finalHealth
   }
 }
