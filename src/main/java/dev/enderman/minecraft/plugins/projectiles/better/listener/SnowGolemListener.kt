@@ -80,6 +80,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     val hitEntity = event.hitEntity
 
+    if (hitEntity is Snowman) return
     if (hitEntity !is LivingEntity) return
 
     val configurationSection = plugin.config.getConfigurationSection("projectiles.snowball.snowman-snowball")!!
