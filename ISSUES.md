@@ -11,15 +11,18 @@ Mark the checkbox as ticked (`[x]`) in order to mark an issue as fixed.
 - [ ] Snow golems will not regenerate after server restart.
 - [ ] Snow golem health regeneration is NOT TRACKED.
 
+### Ghasts
+
+- [ ] Ghast fireballs don't match the size of the ghast (this problem is present with black hole ghasts and ur-ghasts).
+
+## Won't Fix
+
+## Fixed
+
 ### Projectiles
 
 - [X] Projectiles don't seem to damage entities the same way anymore.
 
 ### Ghasts
 
-- [ ] Ghast fireballs don't match the size of the ghast (this problem is present with black hole ghasts and ur-ghasts).
 - [X] The game thinks that all black hole ghasts are ur-ghasts because of how only the scale is checked.
-
-## Won't Fix
-
-## Fixed
