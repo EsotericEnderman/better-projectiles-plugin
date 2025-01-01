@@ -21,6 +21,11 @@ nuclear-ghasts:
       duration-seconds: 15
       lingering: true
 
+ur-ghasts:
+  enabled: true
+  spawn-chance: 0.02
+  extra-scale: 1.00
+
 projectiles:
   snowball:
     damage: 1.0

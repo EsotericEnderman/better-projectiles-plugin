@@ -21,6 +21,8 @@ class BetterProjectilesPlugin : JavaPlugin() {
   val nuclearGhastMobKey = NamespacedKey(this, "nuclear_ghast")
   val nuclearFireballKey = NamespacedKey(this, "nuclear_fireball")
 
+  val urGhastScaleKey = NamespacedKey(this, "ur_ghast_scale")
+
   override fun onEnable() {
     val configuration = config as YamlConfiguration
 
@@ -33,6 +35,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
     pluginManager.registerEvents(SnowGolemListener(this), this)
     pluginManager.registerEvents(ProjectileHitListener(this), this)
     pluginManager.registerEvents(NuclearGhastListener(this), this)
+    pluginManager.registerEvents(UrGhastListener(this), this)
 
     val ghastFireballsCraftable = configuration.getBoolean("projectiles.ghast-fireball.craftable")
 
