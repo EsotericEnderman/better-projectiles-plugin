@@ -1,6 +1,7 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.EntityType
@@ -8,6 +9,7 @@ import org.bukkit.entity.Fireball
 import org.bukkit.entity.Ghast
 import org.bukkit.entity.ThrownPotion
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
@@ -132,7 +134,7 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
     entity.world.createExplosion(entity.location, power, setFire, breakBlocks, shooter)
   }
 
-  @EventHandler
+  @EventHandler(priority = EventPriority.HIGH)
   fun onGhastSpawn(event: EntitySpawnEvent) {
     val entity = event.entity
 
@@ -154,6 +156,13 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
       val nuclearGhastMobKey = plugin.nuclearGhastMobKey
 
       dataContainer.set(nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
+
+      val customName = entity.customName() ?: Component.translatable("entity.minecraft.ghast")
+
+      val nuclear = Component.text("☢ ")
+      val newCustomName = nuclear.append(customName)
+
+      entity.customName(newCustomName)
     }
   }
 

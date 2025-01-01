@@ -7,13 +7,14 @@ import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Ghast
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntitySpawnEvent
 import java.util.*
 
 class UrGhastListener(private val plugin : BetterProjectilesPlugin) : Listener {
 
-  @EventHandler
+  @EventHandler(priority = EventPriority.LOW)
   private fun onGhastSpawn(event: EntitySpawnEvent) {
     val entity = event.entity
 
