@@ -7,6 +7,7 @@ import org.bukkit.Particle
 import org.bukkit.attribute.Attribute
 import org.bukkit.attribute.AttributeModifier
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.entity.LivingEntity
 import org.bukkit.entity.Player
 import org.bukkit.entity.Snowball
 import org.bukkit.entity.Snowman
@@ -21,6 +22,8 @@ import org.bukkit.event.player.PlayerInteractAtEntityEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
@@ -55,6 +58,31 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
       dataContainer.set(plugin.snowGolemSnowballKey, PersistentDataType.BOOLEAN, true)
     }
+  }
+
+  @EventHandler
+  private fun onSnowGolemProjectileHit(event: ProjectileHitEvent) {
+    val projectile = event.entity
+
+    if (projectile !is Snowball) return
+    if (projectile.shooter !is Snowman) return
+
+    val dataContainer = projectile.persistentDataContainer
+    val isSnowGolemProjectile = dataContainer.get(plugin.snowGolemSnowballKey, PersistentDataType.BOOLEAN) == true
+
+    if (!isSnowGolemProjectile) return
+
+    val hitEntity = event.hitEntity
+
+    if (hitEntity !is LivingEntity) return
+
+    hitEntity.addPotionEffect(
+      PotionEffect(PotionEffectType.SLOWNESS, 5 * 20, 1, true, true, true)
+    )
+
+    hitEntity.addPotionEffect(
+      PotionEffect(PotionEffectType.BLINDNESS, 5 * 20, 1, true, true, true)
+    )
   }
 
   @EventHandler
