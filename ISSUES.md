@@ -12,3 +12,7 @@ Mark the checkbox as ticked (`[x]`) in order to mark an issue as fixed.
 ## Projectiles
 
 - [ ] Projectiles don't seem to damage entities the same way anymore.
+
+## Ghasts
+
+- [ ] Ghast fireballs don't match the size of the ghast (this problem is present with black hole ghasts and ur-ghasts).
