@@ -174,6 +174,9 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
       entity.health = finalHealth
       entity.world.spawnParticle(Particle.HEART, entity.location, actualAmountHealed.toInt(), 0.5, 0.25, 0.5)
 
+      val mapValue = snowGolemHealthMap[entity.uniqueId]
+      if (mapValue != null) snowGolemHealthMap[entity.uniqueId] = finalHealth
+
       if (player.gameMode != GameMode.CREATIVE) {
         heldItem.amount -= 1
 
@@ -290,7 +293,12 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
         val maxHealthAttribute = hitEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
         val maxHealth = maxHealthAttribute.value
 
-        hitEntity.health = min(health + maxHealth / 8.0, maxHealth)
+        val finalHealth = min(health + maxHealth / 8.0, maxHealth)
+
+        hitEntity.health = finalHealth
+
+        val mapValue = snowGolemHealthMap[hitEntity.uniqueId]
+        if (mapValue != null) snowGolemHealthMap[hitEntity.uniqueId] = finalHealth
       }
     }
   }
