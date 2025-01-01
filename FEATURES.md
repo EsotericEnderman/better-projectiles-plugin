@@ -48,6 +48,7 @@
 
 ### Ur-Ghasts
 
+- 2% of ghasts will now be ur-ghasts.
 - 8x as big as a normal ghast.
 - 8x the health of a normal ghast.
 - More powerful fireballs.
