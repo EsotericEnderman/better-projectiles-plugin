@@ -1,6 +1,7 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Fireball
@@ -55,6 +56,10 @@ class FireballThrowListener(private val plugin: BetterProjectilesPlugin) : Liste
       val hungerConsumption = fireChargeSetting.getInt("throwing.hunger-consumption")
 
       player.foodLevel = max((player.foodLevel - hungerConsumption).toDouble(), 0.0).toInt()
+
+      if (player.gameMode == GameMode.CREATIVE) return
+
+      heldItem.amount -= 1
     }
   }
 }
