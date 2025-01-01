@@ -8,8 +8,8 @@ This file is used to track ideas for future development of this project.
 - [ ] Make snow golems be able to gain more max health.
 - [ ] Make snow golems increase/decrease in size depending on how much health they have.
 - [ ] Don't heal snow golems when they are hit with a snowball in the face (pumpkin), as that wouldn't add more snow to their body.
-- [ ] Regenerate (or get stronger?) when they're in a cold biome.
-- [ ] Regenerate during snowy weather.
+- [X] Regenerate (or get stronger?) when they're in a cold biome.
+- [X] Regenerate during snowy weather.
 
 ## Ghasts
 

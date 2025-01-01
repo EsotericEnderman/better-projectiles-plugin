@@ -27,6 +27,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import org.bukkit.scheduler.BukkitTask
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
@@ -56,6 +57,40 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
       detectionRangeAttribute.addModifier(
         AttributeModifier(plugin.snowGolemDetectionRangeIncreaseAttributeModifierKey, extraDetectionRange, AttributeModifier.Operation.ADD_NUMBER)
       )
+
+      var task: BukkitTask? = null
+      task = plugin.server.scheduler.runTaskTimer(plugin, Runnable {
+        plugin.logger.info("Running runnable...")
+
+        if (entity.isDead) {
+          plugin.logger.info("Snowman is DEAD! Cancelling runnable...")
+          task!!.cancel()
+          return@Runnable
+        }
+
+        val world = entity.world
+        val location = entity.location
+
+        val temperature = world.getTemperature(location.blockX, location.blockY, location.blockZ)
+
+        plugin.logger.info("TEMPERATURE RECORDER: $temperature")
+
+        if (temperature > 0.0) return@Runnable
+
+        val isRegenerating = entity.hasPotionEffect(PotionEffectType.REGENERATION)
+
+        plugin.logger.info("IS ALREADY REGENERATING: $isRegenerating")
+
+        if (isRegenerating) return@Runnable
+
+        val isSnowing = !world.isClearWeather
+
+        plugin.logger.info("WEATHER STATUS: $isSnowing")
+
+        entity.addPotionEffect(
+          PotionEffect(PotionEffectType.REGENERATION, (if (isSnowing) 7 else 2) * 20, if (isSnowing) 2 else 0, true, false)
+        )
+      }, 100L, 100L)
     }
   }
 
