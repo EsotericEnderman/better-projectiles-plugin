@@ -30,6 +30,10 @@ A plugin that improves Minecraft's projectiles.
 
 - 1% (configurable) of ghasts will now be nuclear.
 
+##### Nuclear Fireballs
+
+- Nuclear ghasts shoot nuclear fireballs, which are much more powerful than normal ghast fireballs.
+
 ##### Death
 
 - Nuclear ghasts explode on death.
