@@ -73,6 +73,8 @@ class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Liste
     var task: BukkitTask? = null
 
     val runnable = Runnable {
+      plugin.logger.info("Iterations: $iterations")
+
       if (iterations == 25) {
         task!!.cancel()
 
