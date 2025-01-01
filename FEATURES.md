@@ -43,6 +43,12 @@
 - Nuclear ghasts explode on death.
 - Nuclear ghasts spawn a cloud of poison on death.
 
+### Ur-Ghasts
+
+- 8x as big as a normal ghast.
+- 8x the health of a normal ghast.
+- More powerful fireballs.
+
 ## Projectiles
 
 ### Snow Balls
