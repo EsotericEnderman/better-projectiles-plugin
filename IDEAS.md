@@ -13,6 +13,10 @@ This file is used to track ideas for future development of this project.
 
 ## Ghasts
 
+### Nuclear Ghasts
+
+- [ ] Add more radiation effects (blindness).
+
 ### Black Hole Ghast
 
 - [ ] Have projectiles circle around black hole ghasts.
