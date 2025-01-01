@@ -13,9 +13,11 @@ Mark the checkbox as ticked (`[x]`) in order to mark an issue as fixed.
 
 ### Ghasts
 
-- [ ] Ghast fireballs don't match the size of the ghast (this problem is present with black hole ghasts and ur-ghasts).
-
 ## Won't Fix
+
+### Ghasts
+
+- Ghast fireballs don't match the size of the ghast (this problem is present with black hole ghasts and ur-ghasts). - The scale of fireballs can't be changed.
 
 ## Fixed
 
