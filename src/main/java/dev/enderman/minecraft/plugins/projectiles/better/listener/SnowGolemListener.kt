@@ -221,6 +221,18 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
   }
 
   @EventHandler
+  private fun onSnowGolemProvoked(event: EntityDamageByEntityEvent) {
+    val entity = event.entity
+    val attacker = event.damager
+
+    if (entity !is Snowman) return
+    if (attacker is Snowman) return
+    if (attacker !is LivingEntity) return
+
+    entity.target = attacker
+  }
+
+  @EventHandler
   private fun onSnowGolemSnowballHit(event: ProjectileHitEvent) {
     val hitEntity = event.hitEntity
     val projectile = event.entity
