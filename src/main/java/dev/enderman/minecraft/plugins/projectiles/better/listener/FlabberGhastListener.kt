@@ -75,7 +75,7 @@ class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Liste
     val runnable = Runnable {
       plugin.logger.info("Iterations: $iterations")
 
-      if (iterations == 25) {
+      if (iterations == 25 || entity.isDead) {
         task!!.cancel()
 
         dataContainer.set(plugin.isFlabberGhastedKey, PersistentDataType.BOOLEAN, false)
