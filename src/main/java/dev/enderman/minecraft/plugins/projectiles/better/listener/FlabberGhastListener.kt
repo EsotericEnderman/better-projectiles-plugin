@@ -29,7 +29,7 @@ class FlabberGhastListener(private val plugin : BetterProjectilesPlugin) : Liste
 
     if (randomNumber > flabberGhastSpawnChance) return
 
-    val dataContainer = entity.getPersistentDataContainer()
+    val dataContainer = entity.persistentDataContainer
 
     dataContainer.set(plugin.flabberGhastMobKey, PersistentDataType.BOOLEAN, true)
   }

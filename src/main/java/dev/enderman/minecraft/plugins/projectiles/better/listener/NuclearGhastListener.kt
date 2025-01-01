@@ -179,7 +179,7 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
 
     if (randomNumber > nuclearGhastSpawnChance) return
 
-    val dataContainer = entity.getPersistentDataContainer()
+    val dataContainer = entity.persistentDataContainer
 
     dataContainer.set(plugin.nuclearGhastMobKey, PersistentDataType.BOOLEAN, true)
 
