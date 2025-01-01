@@ -39,6 +39,11 @@ ur-ghasts:
       set-fire: true
       break-blocks: true
 
+black-hole-ghasts:
+  enabled: true
+  spawn-chance: 0.005
+  reduced-scale: 0.9
+
 projectiles:
   snowball:
     damage: 1.0
