@@ -1,5 +1,6 @@
 snow-golems:
   health: 8.0
+  extra-detection-range: 40
 
 nuclear-ghasts:
   enabled: true

@@ -18,6 +18,7 @@
 ### Aggro
 
 - Snow golems will become aggressive towards any mob that attacks them, except for snow golems themselves.
+- Will now follow mobs for a longer distance.
 
 ### Death
 

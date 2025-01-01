@@ -49,6 +49,13 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
       )
 
       entity.health = snowGolemHealth
+
+      val detectionRangeAttribute = entity.getAttribute(Attribute.FOLLOW_RANGE)!!
+      val extraDetectionRange = configuration.getDouble("snow-golems.extra-detection-range")
+
+      detectionRangeAttribute.addModifier(
+        AttributeModifier(plugin.snowGolemDetectionRangeIncreaseAttributeModifierKey, extraDetectionRange, AttributeModifier.Operation.ADD_NUMBER)
+      )
     }
   }
 
