@@ -15,3 +15,10 @@ This file is used to track ideas for future development of this project.
 - [ ] Have projectiles circle around black hole ghasts.
 - [ ] Have black hole ghasts be able to shoot their orbiting projectiles at the player.
 - [ ] Have black hole ghasts pull in the player and damage them when they are in the center.
+
+### Flabberghasts
+
+![Flabberghasts](../assets/ideas/Flabberghasts.png)
+
+- [ ] Flabber about.
+- [ ] Zoom around when they get hit.
