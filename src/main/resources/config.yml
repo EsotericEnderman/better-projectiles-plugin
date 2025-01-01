@@ -24,7 +24,6 @@ nuclear-ghasts:
 projectiles:
   snowball:
     damage: 1.0
-    knockback: 1.0
     snowman-snowball:
       damage: 1.0
       slowness:
@@ -37,7 +36,6 @@ projectiles:
         duration-seconds: 15
   egg:
     damage: 1.0
-    knockback: 1.0
   fire-charge:
     throwing:
       enabled: true

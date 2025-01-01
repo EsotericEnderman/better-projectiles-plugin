@@ -2,6 +2,10 @@ package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.damage.DamageSource
+import org.bukkit.damage.DamageType
+import org.bukkit.entity.Entity
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.ProjectileHitEvent
@@ -18,7 +22,7 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
 
     plugin.logger.info("projectileType = $projectileType")
 
-    if (hitEntity == null) return
+    if (hitEntity !is Player) return
 
     plugin.logger.info("hitEntity.type = " + hitEntity.type)
 
@@ -31,5 +35,15 @@ class ProjectileHitListener(private val plugin: BetterProjectilesPlugin) : Liste
     val source = projectile.shooter
 
     hitEntity.velocity = projectile.velocity.normalize().multiply(knockback / 20.0)
+
+    val builder = DamageSource
+      .builder(DamageType.ARROW)
+      .withDamageLocation(hitEntity.location)
+
+    if (source is Entity) builder.withDirectEntity(source).withCausingEntity(source)
+
+    val damageSource = builder.build()
+
+    hitEntity.damage(damage, damageSource)
   }
 }
