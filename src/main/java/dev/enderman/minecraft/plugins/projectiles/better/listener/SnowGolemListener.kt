@@ -177,7 +177,19 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     if (entity !is Snowman) return
     if (entity.noDamageTicks > 10) return
 
-    plugin.logger.info("Damage type: ${event.damageSource.damageType}")
+    val damageType = event.damageSource.damageType
+
+    plugin.logger.info("Damage type: ${damageType}")
+
+    val world = entity.world
+    val location = entity.location
+
+    if (damageType == DamageType.ON_FIRE) {
+      val particleLocation = location.clone().add(0.0, 1.0, 0.0)
+
+      world.spawnParticle(Particle.FALLING_WATER, particleLocation, 3, 0.3, 0.25, 0.3)
+      return
+    }
 
     val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
     val maxHealth = maxHealthAttribute.value
@@ -196,14 +208,12 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
       val snowballsToDrop = lostSnowballCount % 4
       val snowBlocksToDrop = (lostSnowballCount - snowballsToDrop) / 4
 
-      val world = entity.world
-
       if (snowBlocksToDrop != 0) {
-        world.dropItemNaturally(entity.location, ItemStack(Material.SNOW_BLOCK, snowBlocksToDrop))
+        world.dropItemNaturally(location, ItemStack(Material.SNOW_BLOCK, snowBlocksToDrop))
       }
 
       if (snowballsToDrop != 0) {
-        world.dropItemNaturally(entity.location, ItemStack(Material.SNOWBALL, snowballsToDrop))
+        world.dropItemNaturally(location, ItemStack(Material.SNOWBALL, snowballsToDrop))
       }
     }
   }
