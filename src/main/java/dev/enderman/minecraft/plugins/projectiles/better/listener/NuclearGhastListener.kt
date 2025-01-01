@@ -1,6 +1,7 @@
 package dev.enderman.minecraft.plugins.projectiles.better.listener
 
 import dev.enderman.minecraft.plugins.projectiles.better.BetterProjectilesPlugin
+import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.EntityType
 import org.bukkit.entity.Fireball
@@ -12,6 +13,7 @@ import org.bukkit.event.entity.EntityDeathEvent
 import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.entity.ProjectileHitEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
+import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
@@ -61,8 +63,8 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
       if (poisonEnabled) {
         val potion = world.spawnEntity(location, EntityType.POTION) as ThrownPotion
 
-        val item = potion.item
-        val meta = item.itemMeta as PotionMeta
+        val newItem = ItemStack(if (poisonSettings.getBoolean("lingering")) Material.LINGERING_POTION else Material.POTION)
+        val meta = newItem.itemMeta as PotionMeta
 
         meta.addCustomEffect(
           PotionEffect(
@@ -76,8 +78,8 @@ class NuclearGhastListener(private val plugin: BetterProjectilesPlugin) : Listen
           true
         )
 
-        item.itemMeta = meta
-        potion.item = item
+        newItem.itemMeta = meta
+        potion.item = newItem
 
         potion.splash()
       }
