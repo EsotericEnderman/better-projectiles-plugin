@@ -40,7 +40,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
     val entity = event.entity
 
     if (entity is Snowman) {
-      val maxHealthAttribute = checkNotNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
+      val maxHealthAttribute = checkNotNull(entity.getAttribute(Attribute.MAX_HEALTH))
       val configuration = plugin.config as YamlConfiguration
       val snowGolemHealth = configuration.getDouble("snow-golems.health")
 
@@ -132,7 +132,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     if (health <= 0) return
 
-    val maxHealthAttributeInstance = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+    val maxHealthAttributeInstance = entity.getAttribute(Attribute.MAX_HEALTH)!!
 
     val maxHealth = maxHealthAttributeInstance.value
 
@@ -194,7 +194,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     val health = golem.health
 
-    val maxHealthAttributeInstance = golem.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+    val maxHealthAttributeInstance = golem.getAttribute(Attribute.MAX_HEALTH)!!
     val maxHealth = maxHealthAttributeInstance.value
 
     val isLargeHealthDecrease = player.isSneaking && health >= maxHealth / 2.0
@@ -235,7 +235,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     if (damageType == DamageType.DROWN) return
 
-    val maxHealthAttribute = entity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+    val maxHealthAttribute = entity.getAttribute(Attribute.MAX_HEALTH)!!
     val maxHealth = maxHealthAttribute.value
 
     plugin.logger.info("Max Health: $maxHealth")
@@ -290,7 +290,7 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
         event.isCancelled = true
 
         val health = hitEntity.health
-        val maxHealthAttribute = hitEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!
+        val maxHealthAttribute = hitEntity.getAttribute(Attribute.MAX_HEALTH)!!
         val maxHealth = maxHealthAttribute.value
 
         val finalHealth = min(health + maxHealth / 8.0, maxHealth)
