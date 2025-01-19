@@ -9,6 +9,7 @@
 ### Health
 
 - Increased snow golem health.
+- Snow golems can now gain more health by being healed with snowballs or snow blocks.
 - Snow golems can now be healed by right-clicking them with snowballs or snow blocks.
 - Snow golems can now be healed by throwing snowballs at them.
 - Snow golems can be hurt by taking snowballs or snow blocks from them by right-clicking or shift-right-clicking them while not holding snow blocks or snowballs.

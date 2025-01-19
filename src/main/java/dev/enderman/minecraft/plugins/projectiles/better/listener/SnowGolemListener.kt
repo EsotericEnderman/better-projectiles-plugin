@@ -350,9 +350,19 @@ class SnowGolemListener(private val plugin: BetterProjectilesPlugin) : Listener 
 
     val health = hitEntity.health
     val maxHealthAttribute = hitEntity.getAttribute(Attribute.MAX_HEALTH)!!
-    val maxHealth = maxHealthAttribute.value
+    val maxHealth = plugin.config.getDouble("snow-golems.health")
 
-    val finalHealth = min(health + maxHealth / 8.0, maxHealth)
+    val finalHealth = health + maxHealth / 8.0
+
+    var modifier = maxHealthAttribute.getModifier(plugin.snowGolemDynamicHealthIncreaseKey)
+
+    if (modifier == null) {
+      modifier = AttributeModifier(plugin.snowGolemDynamicHealthIncreaseKey, finalHealth - maxHealth, AttributeModifier.Operation.ADD_NUMBER)
+    } else {
+      maxHealthAttribute.removeModifier(plugin.snowGolemDynamicHealthIncreaseKey)
+    }
+
+    maxHealthAttribute.addModifier(modifier)
 
     hitEntity.health = finalHealth
 

@@ -17,6 +17,7 @@ class BetterProjectilesPlugin : JavaPlugin() {
   private val ghastFireballRecipeKey = NamespacedKey(this, "ghast_fireball_recipe")
   val snowGolemSnowballKey = NamespacedKey(this, "snow_golem_snowball")
   val snowGolemHealthIncreaseAttributeModifierKey = NamespacedKey(this, "snow_golem_health_increase_attribute_modifier")
+  val snowGolemDynamicHealthIncreaseKey = NamespacedKey(this, "snow_golem_dynamic_health_increase")
   val snowGolemDetectionRangeIncreaseAttributeModifierKey = NamespacedKey(this, "snow_golem_detection_range_increase_attribute_modifier")
   val ghastFireballItemKey = NamespacedKey(this, "ghast_fireball_item")
   val nuclearGhastMobKey = NamespacedKey(this, "nuclear_ghast")
