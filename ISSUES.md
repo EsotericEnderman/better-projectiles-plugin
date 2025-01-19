@@ -8,6 +8,7 @@ This file is used to keep track of issues with the plugin.
 
 - Snow golems will not regenerate after server restart.
 - Snow golem health regeneration is NOT TRACKED.
+- Snow golems can get hurt by snow balls FOR SOME REASON.
 
 ### Ghasts
 
