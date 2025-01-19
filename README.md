@@ -1,5 +1,7 @@
 # Better Projectiles Plugin
 
+![Project Status: Abandoned](./assets/images/badges/status.svg)
+
 A plugin that improves Minecraft's projectiles.
 
 ## Features
