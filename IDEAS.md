@@ -8,6 +8,8 @@ This file is used to track ideas for future development of this project.
 
 ## Ghasts
 
+- Make ghasts not attack you if they are really close, as this would result in certain death for them. Instead, they should fly away.
+
 ### Black Hole Ghasts
 
 - Have projectiles circle around black hole ghasts.
